@@ -1,0 +1,24 @@
+﻿<Page
+    x:Class="OralHistoryRecorder.UserSelectionPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:OralHistoryRecorder"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid>
+        <RelativePanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <!--Information Block to inform the uses about their preferred usage method-->
+            <TextBlock Name="infoBlock" FontSize="24" Text="How would you like to access as?"
+                       RelativePanel.AlignVerticalCenterWithPanel="True" 
+                       RelativePanel.AlignHorizontalCenterWithPanel="True"/>
+
+            <!--Administration button which will load the adminPage-->
+            <Button Name="adminButton" Content="Administrator" Margin="60" RelativePanel.Below="infoBlock" Click="adminButton_Click"/>
+
+            <!--student button which will load the MainPage(student's recording tool)-->
+            <Button Name="studentButton" Content="Student" Margin="60" RelativePanel.RightOf="adminButton" RelativePanel.Below="infoBlock" Click="studentButton_Click"/>
+        </RelativePanel>
+    </Grid>
+</Page>

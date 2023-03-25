@@ -1,0 +1,90 @@
+﻿<Page
+    x:Class="OralHistoryRecorder.AdminPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:OralHistoryRecorder"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:data="using:OralHistoryRecorder.Models"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <Style x:Key="MyToggleButtonStyle" TargetType="ToggleButton">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ToggleButton">
+                            <Border x:Name="Border" BorderThickness="1" CornerRadius="8" BorderBrush="{ThemeResource SystemControlForegroundBaseHighBrush}">
+                                <ContentPresenter x:Name="ContentPresenter"
+                                          VerticalAlignment="Center"
+                                          HorizontalAlignment="Center"
+                                          AutomationProperties.AccessibilityView="Raw"
+                                          Content="{TemplateBinding Content}"
+                                          Padding="10"
+                                          FontWeight="Normal" />
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+
+        <!--<local:TimeSpanToStringConverter x:Key="timeSpanToStringConverter"/>-->
+    </Page.Resources>
+
+    <Grid ScrollViewer.VerticalScrollBarVisibility="Auto" 
+          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+          Width="auto" Height="auto">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <GridView x:Name="recordingsDisplayer" ItemsSource="{x:Bind studentRecordingList}" Tapped="recordingsDisplayer_SelectionChanged">
+
+            <GridView.ItemTemplate>
+                <DataTemplate x:DataType="data:StudentRecording">
+                    <RelativePanel>
+                        <StackPanel Background="LightGray" Width="200">
+                            <TextBlock Text="{x:Bind Title}" Foreground="Black"/>
+                            <TextBlock Text="{x:Bind tag}"  Foreground="Black"/>
+                            <TextBlock Text="{x:Bind duration}"  Foreground="Black"/>
+                            <TextBlock Text="{x:Bind decade}"  Foreground="Black"/>
+                        </StackPanel>
+                    </RelativePanel>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+        </GridView>
+        <Slider Name="PlaybackSlider" HorizontalAlignment="Stretch" 
+                VerticalAlignment="Top" Margin="0,100,0,0" ValueChanged="PlaybackSlider_ValueChanged" 
+                Minimum="0"  Grid.Column="1"/>
+        <TextBlock x:Name="CurrentPositionTextBlock"
+                   VerticalAlignment="Center" Margin="100,0,0,650"
+                    Text="00:00" Grid.Column="1" 
+                    Grid.RowSpan="2"/>
+        <Button x:Name="btnPlay" Click="btnPlay_Click" CornerRadius="5"
+                Margin="0,0,0,550" Grid.Column="1" 
+                VerticalAlignment="Center">
+            <StackPanel Orientation="Horizontal">
+                <SymbolIcon x:Name="PlayIcon" Symbol="Play"/>
+                <TextBlock x:Name="PlayText" Text="Play" SelectionChanged="PlayText_SelectionChanged"/>
+            </StackPanel>
+        </Button>
+
+        <Button Name="btnRemoveRecording" Click="btnRemoveRecording_Click" CornerRadius="5"
+                Margin="160,0,0,550" Grid.Column="1" 
+                VerticalAlignment="Center">
+            <StackPanel Orientation="Horizontal">
+                <SymbolIcon Name="RemoveIcon" Symbol="Delete"/>
+                <TextBlock Name="RemoveText" Text="Remove"/>
+            </StackPanel>
+        </Button>
+    </Grid>
+
+</Page>

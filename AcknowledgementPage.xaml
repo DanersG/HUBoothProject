@@ -1,0 +1,23 @@
+﻿<Page
+    x:Class="OralHistoryRecorder.AcknowledgementPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:OralHistoryRecorder"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid>
+        <RelativePanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Name="agreementBlock" FontSize="30" Width="598">
+                <LineBreak/>
+                **  Acknowledge this is a research project <LineBreak/>
+                **  Share only appropriate stories <LineBreak/>
+                **  Made publicly available on History Booth <LineBreak/>
+
+            </TextBlock>
+            <Button x:Name="agreeBtn" Content="Agree" Margin="200, 0, 60, 30" RelativePanel.Below="agreementBlock" Click="agreeBtn_Click"/>
+            <Button x:Name="declineBtn" Content="Decline" Margin="0, 0, 0, 30" RelativePanel.Below="agreementBlock" RelativePanel.RightOf="agreeBtn" Click="declineBtn_Click"/>
+        </RelativePanel>
+    </Grid>
+</Page>
