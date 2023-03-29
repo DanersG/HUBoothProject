@@ -47,26 +47,5 @@ namespace OralHistoryRecorder
         {
             this.Frame.Navigate(typeof(MainPage));
         }
-
-        private void researchCheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-            if (historyBoothCheckBox.IsChecked == true && researchCheckBox.IsChecked == true)
-            {
-                Continue_btn_req.IsEnabled = true;
-            }
-        }
-
-        private void historyBoothCheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-            if (researchCheckBox.IsChecked == true && historyBoothCheckBox.IsChecked == true)
-            {
-                Continue_btn_req.IsEnabled = true;
-            }
-        }
-
-        private void Continue_btn_req_Click(object sender, RoutedEventArgs e)
-        {
-            this.Frame.Navigate(typeof(MainPage));
-        }
     }
 }
