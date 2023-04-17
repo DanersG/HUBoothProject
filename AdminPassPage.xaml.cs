@@ -15,7 +15,6 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using OralHistoryRecorder.ViewModels;
-using Windows.UI.ViewManagement;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -44,7 +43,6 @@ namespace OralHistoryRecorder
             {
                 createPassInst.Visibility = Visibility.Collapsed;
                 setUpButton.Visibility = Visibility.Collapsed;
-
             }
         }
 
@@ -53,6 +51,8 @@ namespace OralHistoryRecorder
             createPassInst.Visibility = Visibility.Visible;
             setUpButton.Visibility= Visibility.Visible;
             setUpButton.Focus(FocusState.Programmatic);
+
+
         }
 
         private async void setUpButton_Click(object sender, RoutedEventArgs e)

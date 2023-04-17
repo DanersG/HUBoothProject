@@ -9,15 +9,20 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Grid>
         <RelativePanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock Name="agreementBlock" FontSize="30" Width="598">
-                <LineBreak/>
-                **  Acknowledge this is a research project <LineBreak/>
-                **  Share only appropriate stories <LineBreak/>
-                **  Made publicly available on History Booth <LineBreak/>
+            <Image Source="Assets\PageBackground.png"/>
+            <Button x:Name="Continue_btn_req" Content="Continue" Height="65" Width="289" RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignHorizontalCenterWithPanel="True" Margin="0,617,0,0" Background="#FFCE9708" FontSize="30" CornerRadius="12,12,12,12" FontWeight="Normal" FontFamily="Segoe UI" Click="Continue_btn_req_Click" RequestedTheme="Light" IsEnabled="False"/>
 
-            </TextBlock>
-            <Button x:Name="agreeBtn" Content="Agree" Margin="200, 0, 60, 30" RelativePanel.Below="agreementBlock" Click="agreeBtn_Click"/>
-            <Button x:Name="declineBtn" Content="Decline" Margin="0, 0, 0, 30" RelativePanel.Below="agreementBlock" RelativePanel.RightOf="agreeBtn" Click="declineBtn_Click"/>
+            <TextBlock x:Name="agreementBlock" RelativePanel.AlignTopWithPanel="True" Margin="124,282,0,0" TextWrapping="Wrap" Text="Requirements" FontSize="50" FontWeight="Bold" Foreground="Black"/>
+            <TextBlock TextWrapping="Wrap" Text="1. Recordings must not exceed 10 minutes." RelativePanel.AlignTopWithPanel="True" Margin="120,358,0,0" FontSize="36" Foreground="Red"/>
+            <TextBlock TextWrapping="Wrap" Text="2. Stories must be appropriate. All stories will be reviewed." RelativePanel.AlignTopWithPanel="True" Margin="122,412,0,0" FontSize="36" Foreground="Red"/>
+            <CheckBox x:Name="researchCheckBox" RelativePanel.AlignTopWithPanel="True" Margin="120,470,0,0" FontSize="36" Foreground="Black" FocusVisualSecondaryBrush="#99000000" RequestedTheme="Light" Checked="researchCheckBox_Checked">
+                <TextBlock Text='I acknowledge the "Oral History Story Booth" is a research project.' Margin="12,-10,0,0" />
+            </CheckBox>
+            <CheckBox x:Name="historyBoothCheckBox" RelativePanel.AlignTopWithPanel="True" Margin="120,533,0,0" FontSize="36" Foreground="Black" RequestedTheme="Light" Checked="historyBoothCheckBox_Checked">
+                <TextBlock Text='I acknowledge stories will be publicly available on History Booth.' Margin="12,-19,0,0" />
+            </CheckBox>
+            <!--<Button x:Name="agreeBtn" Content="Agree" Margin="200, 0, 60, 30" RelativePanel.Below="agreementBlock" Click="agreeBtn_Click" RequestedTheme="Light"/>
+            <Button x:Name="declineBtn" Content="Decline" Margin="0, 0, 0, 30" RelativePanel.Below="agreementBlock" RelativePanel.RightOf="agreeBtn" Click="declineBtn_Click" RequestedTheme="Light"/>-->
         </RelativePanel>
     </Grid>
 </Page>
