@@ -119,9 +119,6 @@
     <Compile Include="AcknowledgementPage.xaml.cs">
       <DependentUpon>AcknowledgementPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AdminLoginPage.xaml.cs">
-      <DependentUpon>AdminLoginPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="AdminPage.xaml.cs">
       <DependentUpon>AdminPage.xaml</DependentUpon>
     </Compile>
@@ -149,17 +146,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\HUBisonLogo.png" />
-<<<<<<< HEAD
     <Content Include="Assets\PageBackground.png" />
     <Content Include="Assets\Welcome Page.png" />
     <Content Include="Images\400HistoryLogo.png" />
     <Content Include="Images\hardinglogo.png" />
     <Content Include="Images\lockIcon.png" />
-=======
-    <Content Include="Images\Group 19AdminLogin.png" />
-    <Content Include="Images\hardinglogo.png" />
-    <EmbeddedResource Include="Images\image 8.jpg" />
->>>>>>> 850d523 (Administration Page - Updated)
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -175,10 +166,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="AcknowledgementPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="AdminLoginPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
