@@ -1,0 +1,61 @@
+﻿<Page
+    x:Class="OralHistoryRecorder.AdminLoginPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:OralHistoryRecorder"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Image Source="/Images/Group 19AdminLogin.png" Stretch="Fill"/>
+        <RelativePanel HorizontalAlignment="Center" VerticalAlignment="Top" Height="908" Margin="0,-102,0,0">
+            <Rectangle x:Name="rect" RadiusX="50.0" RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignTopWithPanel="True" Height="600" Stroke="Black" Width="429" Fill="#FFD2D5E0" StrokeThickness="8" StrokeLineJoin="Round" StrokeDashCap="Round" Margin="0,299,0,0"/>
+            <TextBlock x:Name="loginTitle" RelativePanel.AlignHorizontalCenterWithPanel="True" Margin="0,345,0,0" TextWrapping="Wrap" Text="Admin Login" RequestedTheme="Light" FontSize="36"/>
+            <TextBox x:Name="userNameTextBox" Margin="150,429,0,0" TextWrapping="Wrap" Width="202" Height="42" FontSize="20" RequestedTheme="Light"/>
+            <TextBlock x:Name="usernameTitle" Margin="20,437,0,0" TextWrapping="Wrap" Text="Username:" FontSize="20" RequestedTheme="Light"/>
+            <TextBlock x:Name="passwordTitle" Margin="20,497,0,0" TextWrapping="Wrap" Text="Password:" FontSize="20" RequestedTheme="Light"/>
+            <Button x:Name="loginButton" Content="Login" Margin="150,619,0,0" Height="46" Width="103" HorizontalAlignment="Center" RequestedTheme="Light" BorderThickness="2,2,2,2" Click="loginButton_Click"/>
+            <PasswordBox x:Name="adminPasswordBox" Margin="150,497,0,0" Height="42" Width="202" PasswordRevealMode="Peek" RequestedTheme="Light" FontSize="20"/>
+            <TextBlock x:Name="errorTitle" HorizontalAlignment="Left" Margin="564,560,0,0" TextWrapping="Wrap" Text="Error" Width="308" FontSize="16" RequestedTheme="Light" Foreground="Red" Visibility="Collapsed"/>
+
+
+            <TextBlock x:Name="passQuestion" Text="Would you like to change the password?"
+                        TextAlignment="Center"
+                        Margin="30,15,15,0" Height="30"
+                        RelativePanel.Below="loginButton" Foreground="Black"/>
+
+            <Button x:Name="yesButton" Content="Yes" 
+                    RelativePanel.RightOf="passQuestion"
+                    RelativePanel.Below="loginButton"
+                    Margin="0,10,10,0" Click="yesButton_Click" Foreground="Black" Background="#FFA8AAB3"/>
+            <Button x:Name="noButton" Content="No" 
+                    RelativePanel.RightOf="yesButton" Margin="0,10,10,0"
+                    RelativePanel.Below="loginButton" Click="noButton_Click" Foreground="Black" Background="#FFA8AAB3"/>
+
+
+            <TextBlock x:Name="createPassInst" TextWrapping="WrapWholeWords" Text="Type previous and new password to confirm"
+                       Width="295" RelativePanel.Below="passQuestion" Margin="0,5,0,0" Visibility="Collapsed"
+                       RelativePanel.AlignHorizontalCenterWithPanel="True" Foreground="Black"/>
+
+            <PasswordBox x:Name="prevPasswordBox" Height="42" Width="202"
+                         PlaceholderText="Previous Password..." Visibility="Collapsed"
+                         PasswordRevealMode="Peek" RequestedTheme="Light" FontSize="20"
+                         RelativePanel.Below="createPassInst"
+                         RelativePanel.AlignHorizontalCenterWithPanel="True"/>
+
+            <PasswordBox x:Name="newPasswordBox" Height="42" Width="202" Margin="0,10,0,0" 
+                         PasswordRevealMode="Peek" PlaceholderText="New Password..." RequestedTheme="Light" FontSize="20" Visibility="Collapsed"
+                         RelativePanel.Below="prevPasswordBox"
+                         RelativePanel.AlignHorizontalCenterWithPanel="True"/>
+
+            <Button x:Name="setUpButton" Content="Set Password"
+                    RelativePanel.Below="newPasswordBox" Visibility="Collapsed"
+                    RelativePanel.AlignHorizontalCenterWithPanel="True"
+                    Click="setUpButton_Click"
+                    Height="30" Width="110" Margin="0,10,0,0" Foreground="Black" 
+                    Background="#FFA8AAB3"/>
+        </RelativePanel>
+    </Grid>
+</Page>
