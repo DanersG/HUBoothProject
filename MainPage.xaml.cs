@@ -218,7 +218,6 @@ namespace OralHistoryRecorder
                 CloseButtonText = "Ok",
             };
             await successfulSubmissionDialog.ShowAsync();
-            this.Frame.Navigate(typeof(UserSelectionPage));
         }
 
         // While it works, it is not being used at the moment. However, is being kept for future development.
