@@ -29,7 +29,7 @@ namespace OralHistoryRecorder
 
         private void adminButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(AdminPassPage));
+            this.Frame.Navigate(typeof(AdminLoginPage));
         }
 
         private void studentButton_Click(object sender, RoutedEventArgs e)

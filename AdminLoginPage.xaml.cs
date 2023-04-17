@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
-using TagLib;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -14,8 +14,6 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using OralHistoryRecorder.ViewModels;
-using Windows.UI.ViewManagement;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -24,35 +22,39 @@ namespace OralHistoryRecorder
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class AdminPassPage : Page
+    public sealed partial class AdminLoginPage : Page
     {
-
         private List<UserTemplate> users;
-        public AdminPassPage()
+        public AdminLoginPage()
         {
             users = new List<UserTemplate>();
             this.InitializeComponent();
-            users.Add(new UserTemplate{ username = "klaing", password="H12345678" });
-            users.Add(new UserTemplate{ username = "test", password="test" });
+            users.Add(new UserTemplate { username = "klaing", password = "H12345678" });
+            users.Add(new UserTemplate { username = "test", password = "test" });
+            users.Add(new UserTemplate { username = "test", password = "test" });
         }
 
         private void yesButton_Click(object sender, RoutedEventArgs e)
         {
-            adminPass.Focus(FocusState.Programmatic);
-
-            if(createPassInst.Visibility != Visibility.Collapsed)
-            {
-                createPassInst.Visibility = Visibility.Collapsed;
-                setUpButton.Visibility = Visibility.Collapsed;
-
-            }
+            createPassInst.Visibility = Visibility.Visible;
+            setUpButton.Visibility = Visibility.Visible;
+            setUpButton.Focus(FocusState.Programmatic);
+            prevPasswordBox.Visibility = Visibility.Visible;
+            newPasswordBox.Visibility = Visibility.Visible;
         }
 
         private void noButton_Click(object sender, RoutedEventArgs e)
         {
-            createPassInst.Visibility = Visibility.Visible;
-            setUpButton.Visibility= Visibility.Visible;
-            setUpButton.Focus(FocusState.Programmatic);
+            adminPasswordBox.Focus(FocusState.Programmatic);
+
+            if (createPassInst.Visibility != Visibility.Collapsed)
+            {
+                createPassInst.Visibility = Visibility.Collapsed;
+                setUpButton.Visibility = Visibility.Collapsed;
+
+                prevPasswordBox.Visibility = Visibility.Collapsed;
+                newPasswordBox.Visibility = Visibility.Collapsed;
+            }
         }
 
         private async void setUpButton_Click(object sender, RoutedEventArgs e)
@@ -61,10 +63,10 @@ namespace OralHistoryRecorder
             setUpButton.Visibility = Visibility.Collapsed;
 
 
-            if(usernameTextBox.Text != "" && adminPass.Password != "")
+            if (userNameTextBox.Text != "" && adminPasswordBox.Password != "")
             {
-                users.Add(new UserTemplate { username = usernameTextBox.Text, password = adminPass.Password });
-            
+                users.Add(new UserTemplate { username = userNameTextBox.Text, password = adminPasswordBox.Password });
+
                 ContentDialog userCreated = new ContentDialog
                 {
                     Title = "Successful",
@@ -89,13 +91,14 @@ namespace OralHistoryRecorder
 
         }
 
-        private async void enterButton_Click(object sender, RoutedEventArgs e)
+        private async void loginButton_Click(object sender, RoutedEventArgs e)
         {
-            var tempUser = new UserTemplate { username = usernameTextBox.Text, password = adminPass.Password };
-            
+            var tempUser = new UserTemplate { username = userNameTextBox.Text, password = adminPasswordBox.Password };
+
             var isUser = users.Where(user => (user.username == tempUser.username && user.password == tempUser.password));
-            
-            if (isUser.Any()){
+
+            if (isUser.Any())
+            {
                 this.Frame.Navigate(typeof(AdminPage));
             }
 
