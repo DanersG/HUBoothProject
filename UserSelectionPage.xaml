@@ -6,19 +6,34 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" RequestedTheme="Light">
     <Grid>
         <RelativePanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <!--Information Block to inform the uses about their preferred usage method-->
-            <TextBlock Name="infoBlock" FontSize="24" Text="How would you like to access as?"
+            <Image Source="Assets\Welcome Page.png" Stretch="Fill"/>
+            
+            <TextBlock Name="Title" Text="Oral History Storytelling Booth"
                        RelativePanel.AlignVerticalCenterWithPanel="True" 
-                       RelativePanel.AlignHorizontalCenterWithPanel="True"/>
+                       RelativePanel.AlignHorizontalCenterWithPanel="True" 
+                       Margin="0,-80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="36"/>
+            <TextBlock x:Name="infoBlock" Text="We invite you to share memories of your time spent at Harding that have impacted your journey, as they are a key part of Harding’s rich history." 
+                       RelativePanel.AlignVerticalCenterWithPanel="True" 
+                       RelativePanel.AlignHorizontalCenterWithPanel="True" 
+                       TextWrapping="Wrap" FontSize="30" Width="953" Margin="0,150,0,0"/>
 
-            <!--Administration button which will load the adminPage-->
-            <Button Name="adminButton" Content="Administrator" Margin="60" RelativePanel.Below="infoBlock" Click="adminButton_Click"/>
+            
+            <Button x:Name="studentButton" Content="Share Story" RelativePanel.Below="infoBlock"
+                    Margin="40"
+                    RelativePanel.AlignHorizontalCenterWithPanel="True"
+                    Height="65" Width="289" HorizontalAlignment="Center" Background="#FFCE9708" Foreground="White" 
+                    FontSize="30" CornerRadius="12,12,12,12" Click="studentButton_Click" FontWeight="Normal" FontFamily="Segoe UI"/>
 
-            <!--student button which will load the MainPage(student's recording tool)-->
-            <Button Name="studentButton" Content="Student" Margin="60" RelativePanel.RightOf="adminButton" RelativePanel.Below="infoBlock" Click="studentButton_Click"/>
+
+            <Button Margin="70" Padding="0" BorderThickness="0" RelativePanel.AlignBottomWithPanel="True" Background="#00000000" Click="adminButton_Click">
+                <StackPanel>
+                    <Image Source="/Images/lockIcon.png" Stretch="UniformToFill" Height="60" Width="60"/>
+                    <TextBlock Text="Administrator" VerticalAlignment="Center" TextAlignment="Center" FontSize="20"/>
+                </StackPanel>
+            </Button>
         </RelativePanel>
     </Grid>
 </Page>
