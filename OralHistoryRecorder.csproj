@@ -149,6 +149,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\HUBisonLogo.png" />
+    <EmbeddedResource Include="Assets\image 8.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <Content Include="Assets\PageBackground.png" />
     <Content Include="Assets\Welcome Page.png" />
     <Content Include="Images\400HistoryLogo.png" />
