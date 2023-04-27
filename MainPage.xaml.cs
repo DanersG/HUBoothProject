@@ -338,7 +338,7 @@ namespace OralHistoryRecorder
             {
                 RestoreToDefault();
                 btnStartRecording.IsEnabled = true;
-                btnPauseRecording.IsEnabled = true;
+                btnPauseRecording.IsEnabled = false;
                 student.Title = nameTextBox.Text + student.RecId;
                 audioRecorder.audioFileName = nameTextBox.Text + student.RecId + ".mp3";
             } 

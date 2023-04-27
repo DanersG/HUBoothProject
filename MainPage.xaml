@@ -16,6 +16,7 @@
                 <Setter Property="BorderThickness" Value="1"/>
                 <Setter Property="FontSize" Value="16"/>
             </Style>
+            
             <Style x:Key="ButtonStyle" TargetType="Button">
                 <Setter Property="Margin" Value="0,16,0,0"/>
                 <Setter Property="Padding" Value="12,8"/>
@@ -139,15 +140,15 @@
                             SelectionChanged="decadeComboBox_SelectionChanged"
                             SelectedIndex="0"
                               >
-                        <ComboBoxItem Content="1940"/>
-                        <ComboBoxItem Content="1950"/>
-                        <ComboBoxItem Content="1960"/>
-                        <ComboBoxItem Content="1970"/>
-                        <ComboBoxItem Content="1980"/>
-                        <ComboBoxItem Content="1990"/>
-                        <ComboBoxItem Content="2000"/>
-                        <ComboBoxItem Content="2010"/>
-                        <ComboBoxItem Content="2020-23"/>
+                        <ComboBoxItem Content="1940s"/>
+                        <ComboBoxItem Content="1950s"/>
+                        <ComboBoxItem Content="1960s"/>
+                        <ComboBoxItem Content="1970s"/>
+                        <ComboBoxItem Content="1980s"/>
+                        <ComboBoxItem Content="1990s"/>
+                        <ComboBoxItem Content="2000s"/>
+                        <ComboBoxItem Content="2010s"/>
+                        <ComboBoxItem Content="2020s"/>
 
                     </ComboBox>
                 </StackPanel>
@@ -162,7 +163,8 @@
                     <TextBlock TextWrapping="Wrap" Text="Click the button to start recording" FontSize="30"/>
                     <TextBlock TextWrapping="Wrap" Text="Must not exceed 10 minutes" HorizontalAlignment="Center" FontSize="30" Foreground="Red"/>
 
-                    <Button Name="btnStartRecording" Click="btnStartRecording_Click"  CornerRadius="5" HorizontalAlignment="Center" Margin="0,45,0,20" Foreground="White" Background="#FFEA1E69">
+                    <Button Name="btnStartRecording" Click="btnStartRecording_Click"  CornerRadius="5" HorizontalAlignment="Center" Margin="0,45,0,20" 
+                            Foreground="White" FontWeight="SemiBold" Background="#FFD72D6C">
                         <StackPanel Orientation="Horizontal" Spacing="5">
                             <Viewbox Width="24">
                                 <SymbolIcon Name="RecordingIcon" Symbol="Microphone" Foreground="White" />
@@ -172,7 +174,7 @@
                     </Button>
 
                     <!--Timer-->
-                    <Border Background="#A28448" HorizontalAlignment="Center" CornerRadius="5" Padding="5">
+                    <Border Background="#FFFCDBDB" HorizontalAlignment="Center" CornerRadius="5" Padding="5">
                         <TextBlock x:Name="timeText" Text="00:10:00:000" HorizontalAlignment="Center" Foreground="#000008" Padding="5" FontWeight="ExtraBold" FontSize="18"/>
                     </Border>
                 </StackPanel>
@@ -202,7 +204,8 @@
 
                 <RelativePanel>
                     <!--Delete/Submit-->
-                        <Button Name="btnRemoveRecording" Click="btnRemoveRecording_Click" CornerRadius="5" RelativePanel.AlignLeftWithPanel="True" Margin="10">
+                        <Button Name="btnRemoveRecording" Click="btnRemoveRecording_Click" CornerRadius="5" RelativePanel.AlignLeftWithPanel="True" 
+                                Margin="10" Background="White">
                             <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
                                 <Viewbox Height="25">
                                     <SymbolIcon Name="RemoveIcon" Symbol="Delete"/>
@@ -211,7 +214,8 @@
                             </StackPanel>
                         </Button>
 
-                        <Button Name="btnEnterTag" Click="btnEnterTag_Click" CornerRadius="5" RelativePanel.AlignRightWithPanel="True" Margin="10">
+                        <Button Name="btnEnterTag" Click="btnEnterTag_Click" CornerRadius="5" RelativePanel.AlignRightWithPanel="True" 
+                                Margin="10" Background="White">
                             <StackPanel Orientation="Vertical" HorizontalAlignment="Right">
                                 <Viewbox Height="25">
                                     <SymbolIcon Name="SubmitIcon" Symbol="Save"/>
