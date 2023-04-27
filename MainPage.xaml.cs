@@ -314,6 +314,7 @@ namespace OralHistoryRecorder
         {
             if (HardingStudentCheckIcon != null)
             {
+                CheckedText.Text = "Yes";
                 HardingStudentCheckIcon.Symbol = Symbol.Accept;
             }
         }
@@ -322,6 +323,7 @@ namespace OralHistoryRecorder
         {
             if (HardingStudentCheckIcon != null)
             {
+                CheckedText.Text = "No";
                 HardingStudentCheckIcon.Symbol = Symbol.Cancel;
             }
         }
