@@ -41,6 +41,7 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+
         </ResourceDictionary>
     </Page.Resources>
     <Grid>
@@ -152,67 +153,76 @@
                 </StackPanel>
             </StackPanel>
 
+            <!--Recording Container-->
             <StackPanel Spacing="10" Background="White" Height="520" RelativePanel.RightOf="GoldContainer" RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignBottomWithPanel="True">
-                
+
 
                 <!--Recording Controllers-->
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="5">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="30">
                     <TextBlock TextWrapping="Wrap" Text="Click the button to start recording" FontSize="30"/>
-                    <TextBlock TextWrapping="Wrap" Text="Must not exceed 10 minutes" FontSize="30" Foreground="Red"/>
+                    <TextBlock TextWrapping="Wrap" Text="Must not exceed 10 minutes" HorizontalAlignment="Center" FontSize="30" Foreground="Red"/>
 
-                    <Button Name="btnStartRecording" Click="btnStartRecording_Click" CornerRadius="5" Margin="20" FontWeight="Bold">
-                        <StackPanel Orientation="Horizontal">
-                            <SymbolIcon Name="RecordingIcon" Symbol="Microphone"/>
-                            <TextBlock Name="RecordingText" Text="Start" />
+                    <Button Name="btnStartRecording" Click="btnStartRecording_Click"  CornerRadius="5" HorizontalAlignment="Center" Margin="0,45,0,20" Foreground="White" Background="#FFEA1E69">
+                        <StackPanel Orientation="Horizontal" Spacing="5">
+                            <Viewbox Width="24">
+                                <SymbolIcon Name="RecordingIcon" Symbol="Microphone" Foreground="White" />
+                            </Viewbox>
+                            <TextBlock Name="RecordingText" Text="Start" FontSize="24" />
                         </StackPanel>
                     </Button>
 
-                    
+                    <!--Timer-->
+                    <Border Background="#A28448" HorizontalAlignment="Center" CornerRadius="5" Padding="5">
+                        <TextBlock x:Name="timeText" Text="00:10:00:000" HorizontalAlignment="Center" Foreground="#000008" Padding="5" FontWeight="ExtraBold" FontSize="18"/>
+                    </Border>
                 </StackPanel>
-                
-                <!--Timer-->
-                <Border Background="#A28448" HorizontalAlignment="Center" CornerRadius="5" Padding="5">
-                    <TextBlock x:Name="timeText" Text="00:10:00:000" HorizontalAlignment="Center" Foreground="#000008" Padding="5" FontWeight="ExtraBold" FontSize="18"/>
-                </Border>
 
-                <!--Playing Controllers-->
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="50" Margin="5">
-                    <Button x:Name="btnPlay" Click="btnPlay_Click" CornerRadius="5">
-                        <StackPanel Orientation="Horizontal">
-                            <SymbolIcon Name="PlayIcon" Symbol="Play"/>
-                            <TextBlock Name="PlayText" Text="Play"/>
-                        </StackPanel>
-                    </Button>
+                <StackPanel>
+                    <!--Play Recording Slider-->
+                    <Slider Name="PlaybackSlider" ValueChanged="PlaybackSlider_ValueChanged" Minimum="0" Margin="10,0,10,0"/>
+                    <TextBlock x:Name="CurrentPositionTextBlock" HorizontalAlignment="Center" Text="00:00"/>
 
-                    <Button Name="btnPauseRecording" Click="btnPauseRecording_Click" CornerRadius="5">
-                        <StackPanel Orientation="Horizontal">
-                            <SymbolIcon Name="PauseIcon" Symbol="Pause"/>
-                            <TextBlock Name="PauseText" Text="Pause"/>
-                        </StackPanel>
-                    </Button>
+                    <!--Playing Controllers-->
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="50" Margin="10">
+                        <Button x:Name="btnPlay" Click="btnPlay_Click" CornerRadius="5">
+                            <StackPanel Orientation="Horizontal" Spacing="5">
+                                <SymbolIcon Name="PlayIcon" Symbol="Play"/>
+                                <TextBlock Name="PlayText" Text="Play" FontSize="20"/>
+                            </StackPanel>
+                        </Button>
 
-                    
+                        <Button Name="btnPauseRecording" Click="btnPauseRecording_Click" CornerRadius="5">
+                            <StackPanel Orientation="Horizontal" Spacing="5">
+                                <SymbolIcon Name="PauseIcon" Symbol="Pause"/>
+                                <TextBlock Name="PauseText" Text="Pause" FontSize="20"/>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
                 </StackPanel>
-                
-                <!--Play Recording Slider-->
-                <Slider Name="PlaybackSlider" ValueChanged="PlaybackSlider_ValueChanged" Minimum="0" Margin="5,0,5,0"/>
-                <TextBlock x:Name="CurrentPositionTextBlock" HorizontalAlignment="Center" Text="00:00"/>
 
-                <!--Delete/Submit-->
-                <StackPanel Orientation="Horizontal" Margin="30">
-                    
-                    <Button Name="btnRemoveRecording" Click="btnRemoveRecording_Click" CornerRadius="5">
-                        <StackPanel Orientation="Horizontal">
-                            <SymbolIcon Name="RemoveIcon" Symbol="Delete"/>
-                            <TextBlock Name="RemoveText" Text="Remove"/>
-                        </StackPanel>
-                    </Button>
+                <RelativePanel>
+                    <!--Delete/Submit-->
+                        <Button Name="btnRemoveRecording" Click="btnRemoveRecording_Click" CornerRadius="5" RelativePanel.AlignLeftWithPanel="True" Margin="10">
+                            <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+                                <Viewbox Height="25">
+                                    <SymbolIcon Name="RemoveIcon" Symbol="Delete"/>
+                                </Viewbox>
+                                <TextBlock Name="RemoveText" Text="Remove" FontSize="20"/>
+                            </StackPanel>
+                        </Button>
 
-                    <Button Name="btnEnterTag" Click="btnEnterTag_Click" CornerRadius="5">Submit</Button>
-
-                </StackPanel>
+                        <Button Name="btnEnterTag" Click="btnEnterTag_Click" CornerRadius="5" RelativePanel.AlignRightWithPanel="True" Margin="10">
+                            <StackPanel Orientation="Vertical" HorizontalAlignment="Right">
+                                <Viewbox Height="25">
+                                    <SymbolIcon Name="SubmitIcon" Symbol="Save"/>
+                                </Viewbox>
+                                <TextBlock Name="SubmitText" Text="Submit" FontSize="20"/>
+                            </StackPanel>
+                        </Button>
+                </RelativePanel>
                 
             </StackPanel>
+           
             
             <!--<StackPanel Margin="10" HorizontalAlignment="Center" >
                 <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Text="Oral History Booth" Margin="10"/>
