@@ -148,12 +148,12 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\harding-logo%402x 4.png" />
     <Content Include="Assets\HUBisonLogo.png" />
     <EmbeddedResource Include="Assets\image 8.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <Content Include="Assets\PageBackground.png" />
-    <Content Include="Assets\voice 1.png" />
     <Content Include="Assets\Welcome Page.png" />
     <Content Include="Images\400HistoryLogo.png" />
     <Content Include="Images\hardinglogo.png" />

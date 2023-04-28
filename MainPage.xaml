@@ -47,9 +47,17 @@
     </Page.Resources>
     <Grid>
         <RelativePanel>
-            <Image Source="Assets\PageBackground.png" Stretch="Fill"/>
-            <!--<Rectangle x:Name="RedRect" Fill="Goldenrod" Width="700" Height="700" RelativePanel.AlignBottomWithPanel="true"/>-->
-            <StackPanel x:Name="GoldContainer" Height="520" Spacing="10" Background="Goldenrod" RelativePanel.AlignBottomWithPanel="true">
+            <StackPanel x:Name="PageLogo" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True"
+                        RelativePanel.AlignTopWithPanel="True" Background="Black" Height="130">
+                <Image Source="Assets\harding-logo@2x 4.png" Stretch="Uniform" Width="400" Margin="10"/>          
+            </StackPanel>
+            <StackPanel x:Name="TitleTextBlock" RelativePanel.Below="PageLogo" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True" 
+                        Height="75" BorderBrush='Black' BorderThickness="1.1">
+                <TextBlock FontSize="35" Margin="30,10,0,10" Text="Oral History Storytelling Booth"></TextBlock>
+            </StackPanel>
+            <!--<Image Source="Assets\PageBackground.png" Stretch="Fill"/>-->
+            
+            <StackPanel x:Name="GoldContainer" Spacing="10" Background="Goldenrod" RelativePanel.AlignBottomWithPanel="true" RelativePanel.Below="TitleTextBlock">
                 <!--Meta data-->
                 <StackPanel>
                     <StackPanel Margin="30">
@@ -154,16 +162,15 @@
             </StackPanel>
 
             <!--Recording Container-->
-            <StackPanel Spacing="10" Background="White" Height="520" RelativePanel.RightOf="GoldContainer" RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignBottomWithPanel="True">
-
-
+            <StackPanel x:Name="RecordingsContainer" Spacing="10" Background="White" RelativePanel.RightOf="GoldContainer" 
+                        RelativePanel.AlignRightWithPanel="True" RelativePanel.Below="TitleTextBlock" VerticalAlignment="Center">
                 <!--Recording Controllers-->
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="15">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="0,50,0,0">
                     <TextBlock x:Name="RecordingMessageBox" TextWrapping="Wrap" HorizontalAlignment="Center" Text="Click the button to start recording" FontSize="30"
-                               Margin="0,25,0,0" TextAlignment="Center"/>
+                               Margin="0,25,0,10" TextAlignment="Center"/>
                     <TextBlock x:Name="RecordingAlertMessageBox" TextWrapping="Wrap" Text="Must not exceed 10 minutes" HorizontalAlignment="Center" FontSize="26" Foreground="Red"/>
 
-                    <Button Name="btnStartRecording" Click="btnStartRecording_Click"  CornerRadius="5" HorizontalAlignment="Center" Margin="0,45,0,20" 
+                    <Button Name="btnStartRecording" Click="btnStartRecording_Click"  CornerRadius="5" HorizontalAlignment="Center" Margin="0,65,0,30" 
                             Foreground="White" FontWeight="SemiBold" Background="#FFD72D6C">
                         <StackPanel Orientation="Horizontal" Spacing="5">
                             <Viewbox Width="24">
@@ -173,7 +180,6 @@
                         </StackPanel>
                     </Button>
 
-                    <!--Timer-->
                     <Border Background="#FFFCDBDB" HorizontalAlignment="Center" CornerRadius="5" Padding="5">
                         <TextBlock x:Name="timeText" Text="00:10:00:000" HorizontalAlignment="Center" Foreground="#000008" Padding="5" FontWeight="ExtraBold" FontSize="18"/>
                     </Border>
@@ -181,7 +187,7 @@
 
                 <StackPanel>
                     <!--Play Recording Slider-->
-                    <Slider Name="PlaybackSlider" ValueChanged="PlaybackSlider_ValueChanged" Minimum="0" Margin="10,0,10,0"/>
+                    <Slider Name="PlaybackSlider" ValueChanged="PlaybackSlider_ValueChanged" Minimum="0" Margin="25,45,25,0"/>
                     <TextBlock x:Name="CurrentPositionTextBlock" HorizontalAlignment="Center" Text="00:00"/>
 
                     <!--Playing Controllers-->
@@ -201,33 +207,32 @@
                         </Button>
                     </StackPanel>
                 </StackPanel>
-
-                <RelativePanel>
-                    <!--Delete/Submit-->
-                        <Button Name="btnRemoveRecording" Click="btnRemoveRecording_Click" CornerRadius="5" RelativePanel.AlignLeftWithPanel="True" 
-                                Margin="10" Background="White">
-                            <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
-                                <Viewbox Height="25">
-                                    <SymbolIcon Name="RemoveIcon" Symbol="Delete"/>
-                                </Viewbox>
-                                <TextBlock Name="RemoveText" Text="Remove" FontSize="20"/>
-                            </StackPanel>
-                        </Button>
-
-                        <Button Name="btnEnterTag" Click="btnEnterTag_Click" CornerRadius="5" RelativePanel.AlignRightWithPanel="True" 
-                                Margin="10" Background="White">
-                            <StackPanel Orientation="Vertical" HorizontalAlignment="Right">
-                                <Viewbox Height="25">
-                                    <SymbolIcon Name="SubmitIcon" Symbol="Save"/>
-                                </Viewbox>
-                                <TextBlock Name="SubmitText" Text="Submit" FontSize="20"/>
-                            </StackPanel>
-                        </Button>
-                </RelativePanel>
-                
             </StackPanel>
-           
-            
+
+            <RelativePanel x:Name="SubmitBtnContainer"  RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignLeftWith="RecordingsContainer" 
+                           RelativePanel.AlignBottomWithPanel="True" Height="120"> 
+                <!--Delete/Submit-->
+                <Button Name="btnRemoveRecording" Click="btnRemoveRecording_Click" CornerRadius="5" RelativePanel.AlignLeftWithPanel="True" 
+                                RelativePanel.AlignBottomWithPanel="True" Margin="20" Background="White">
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+                        <Viewbox Height="25">
+                            <SymbolIcon Name="RemoveIcon" Symbol="Delete"/>
+                        </Viewbox>
+                        <TextBlock Name="RemoveText" Text="Remove" FontSize="20"/>
+                    </StackPanel>
+                </Button>
+
+                <Button Name="btnEnterTag" Click="btnEnterTag_Click" CornerRadius="5" RelativePanel.AlignRightWithPanel="True" 
+                                RelativePanel.AlignBottomWithPanel="True" Margin="20" Background="White">
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Right">
+                        <Viewbox Height="25">
+                            <SymbolIcon Name="SubmitIcon" Symbol="Save"/>
+                        </Viewbox>
+                        <TextBlock Name="SubmitText" Text="Submit" FontSize="20"/>
+                    </StackPanel>
+                </Button>
+            </RelativePanel>
+
             <!--<StackPanel Margin="10" HorizontalAlignment="Center" >
                 <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Text="Oral History Booth" Margin="10"/>
                 <Image Width="Auto" Height="100" Source="/Assets/HUBisonLogo.png"/>

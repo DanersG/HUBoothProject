@@ -8,8 +8,16 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" RequestedTheme="Light">
     <Grid>
-        <RelativePanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Image Source="Assets\Welcome Page.png" Stretch="Fill"/>
+        <RelativePanel>
+            <StackPanel x:Name="PageLogo" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True"
+                        RelativePanel.AlignTopWithPanel="True" Background="Black" Height="130">
+                <Image Source="Assets\harding-logo@2x 4.png" Stretch="Uniform" Width="400" Margin="10"/>
+            </StackPanel>
+            <StackPanel x:Name="TitleTextBlock" RelativePanel.Below="PageLogo" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True" 
+                        Height="75" BorderBrush='Black' BorderThickness="1.1">
+                <TextBlock FontSize="35" Margin="30,10,0,10" Text="Oral History Storytelling Booth"></TextBlock>
+            </StackPanel>
+            <!--<Image Source="Assets\Welcome Page.png" Stretch="Fill"/>-->
             
             <TextBlock Name="Title" Text="Oral History Storytelling Booth"
                        RelativePanel.AlignVerticalCenterWithPanel="True" 
