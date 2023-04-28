@@ -60,7 +60,7 @@ namespace OralHistoryRecorder
 
             audioPlayingTimer = new DispatcherTimer();
             audioPlayingTimer.Tick += AudioPlayingTimer_Tick;
-            audioPlayingTimer.Interval = TimeSpan.FromSeconds(150);
+            audioPlayingTimer.Interval = TimeSpan.FromSeconds(1);
         }
 
         private void RestoreToDefault()
