@@ -56,7 +56,7 @@
                 <TextBlock FontSize="35" Margin="30,10,0,10" Text="Oral History Storytelling Booth"></TextBlock>
             </StackPanel>
             <!--<Image Source="Assets\PageBackground.png" Stretch="Fill"/>-->
-            
+            <!--<Rectangle x:Name="RedRect" Fill="Goldenrod" Width="700" Height="700" RelativePanel.AlignBottomWithPanel="true"/>-->
             <StackPanel x:Name="GoldContainer" Spacing="10" Background="Goldenrod" RelativePanel.AlignBottomWithPanel="true" RelativePanel.Below="TitleTextBlock">
                 <!--Meta data-->
                 <StackPanel>
@@ -170,7 +170,7 @@
                                Margin="0,25,0,10" TextAlignment="Center"/>
                     <TextBlock x:Name="RecordingAlertMessageBox" TextWrapping="Wrap" Text="Must not exceed 10 minutes" HorizontalAlignment="Center" FontSize="26" Foreground="Red"/>
 
-                    <Button Name="btnStartRecording" Click="btnStartRecording_Click"  CornerRadius="5" HorizontalAlignment="Center" Margin="0,65,0,30" 
+                    <Button Name="btnStartRecording" Click="btnStartRecording_Click"  CornerRadius="5" HorizontalAlignment="Center" Margin="0,60,0,30" 
                             Foreground="White" FontWeight="SemiBold" Background="#FFD72D6C">
                         <StackPanel Orientation="Horizontal" Spacing="5">
                             <Viewbox Width="24">
@@ -181,13 +181,13 @@
                     </Button>
 
                     <Border Background="#FFFCDBDB" HorizontalAlignment="Center" CornerRadius="5" Padding="5">
-                        <TextBlock x:Name="timeText" Text="00:10:00:000" HorizontalAlignment="Center" Foreground="#000008" Padding="5" FontWeight="ExtraBold" FontSize="18"/>
+                        <TextBlock x:Name="timeText" Text="10:00" HorizontalAlignment="Center" Foreground="#000008" Padding="5" FontWeight="ExtraBold" FontSize="18"/>
                     </Border>
                 </StackPanel>
 
                 <StackPanel>
                     <!--Play Recording Slider-->
-                    <Slider Name="PlaybackSlider" ValueChanged="PlaybackSlider_ValueChanged" Minimum="0" Margin="25,45,25,0"/>
+                    <Slider Name="PlaybackSlider" ValueChanged="PlaybackSlider_ValueChanged" Minimum="0" Margin="25,50,25,0"/>
                     <TextBlock x:Name="CurrentPositionTextBlock" HorizontalAlignment="Center" Text="00:00"/>
 
                     <!--Playing Controllers-->
