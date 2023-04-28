@@ -10,11 +10,11 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="103*"/>
-            <RowDefinition Height="22*"/>
+            <RowDefinition/>
+            <RowDefinition Height="0*"/>
         </Grid.RowDefinitions>
-        <Image Source="/Assets/image 8.jpg" Stretch="Fill" Grid.RowSpan="2"/>
-        <RelativePanel HorizontalAlignment="Center" VerticalAlignment="Top" Height="908" Margin="0,-102,0,0">
+        <Image Source="/Assets/image 8.jpg" Stretch="Fill"/>
+        <RelativePanel HorizontalAlignment="Center" VerticalAlignment="Top" Height="908" Margin="0,-102,0,0" Width="429">
             <Rectangle x:Name="rect" RadiusX="50.0" RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignTopWithPanel="True" Height="600" Stroke="Black" Width="429" Fill="#FFD2D5E0" StrokeThickness="8" StrokeLineJoin="Round" StrokeDashCap="Round" Margin="0,299,0,0"/>
             <TextBlock x:Name="loginTitle" RelativePanel.AlignHorizontalCenterWithPanel="True" Margin="0,345,0,0" TextWrapping="Wrap" Text="Admin Login" RequestedTheme="Light" FontSize="36"/>
             <TextBox x:Name="userNameTextBox" Margin="150,429,0,0" TextWrapping="Wrap" Width="202" Height="42" FontSize="20" RequestedTheme="Light"/>
