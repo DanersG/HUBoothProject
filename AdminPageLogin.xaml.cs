@@ -57,6 +57,9 @@ namespace OralHistoryRecorder
             }
         }
 
+
+        //Change Password Functionality:
+
         private async void setUpButton_Click(object sender, RoutedEventArgs e)
         {
             createPassInst.Visibility = Visibility.Collapsed;
