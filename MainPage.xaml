@@ -149,7 +149,6 @@
                         <ComboBoxItem Content="2000s"/>
                         <ComboBoxItem Content="2010s"/>
                         <ComboBoxItem Content="2020s"/>
-
                     </ComboBox>
                 </StackPanel>
             </StackPanel>
@@ -159,9 +158,10 @@
 
 
                 <!--Recording Controllers-->
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="30">
-                    <TextBlock TextWrapping="Wrap" Text="Click the button to start recording" FontSize="30"/>
-                    <TextBlock TextWrapping="Wrap" Text="Must not exceed 10 minutes" HorizontalAlignment="Center" FontSize="30" Foreground="Red"/>
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="15">
+                    <TextBlock x:Name="RecordingMessageBox" TextWrapping="Wrap" HorizontalAlignment="Center" Text="Click the button to start recording" FontSize="30"
+                               Margin="0,25,0,0" TextAlignment="Center"/>
+                    <TextBlock x:Name="RecordingAlertMessageBox" TextWrapping="Wrap" Text="Must not exceed 10 minutes" HorizontalAlignment="Center" FontSize="26" Foreground="Red"/>
 
                     <Button Name="btnStartRecording" Click="btnStartRecording_Click"  CornerRadius="5" HorizontalAlignment="Center" Margin="0,45,0,20" 
                             Foreground="White" FontWeight="SemiBold" Background="#FFD72D6C">

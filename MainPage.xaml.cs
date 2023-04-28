@@ -25,7 +25,7 @@ namespace OralHistoryRecorder
         // Slider playback implemented based on:
         // https://learn.microsoft.com/en-us/windows/uwp/audio-video-camera/play-audio-and-video-with-mediaplayer
         // https://stackoverflow.com/questions/45001470/uwp-slider-wont-move-during-playback
-        private DispatcherTimer audioRecordingTimer, audioPlayingTimer;
+        private DispatcherTimer audioRecordingTimer, audioPlayingTimer, audioTextBoxTimer;
 
         // Timer implemented based on: https://stackoverflow.com/questions/42763850/c-sharp-countdown-timer-pause
         private DateTime startedTime, stopTime;
@@ -37,6 +37,19 @@ namespace OralHistoryRecorder
         StudentRecording student;
         private TimeSpan RECORDING_MINUTES_LIMIT = TimeSpan.FromMinutes(10);
 
+        //Function to set the interval for TextBox Blinking message while audio is stopped
+        private void Timer_Tick(object sender, object e)
+        {
+            if (RecordingMessageBox.Text == "")
+            {
+                RecordingMessageBox.Text = "Paused";
+            }
+            else
+            {
+                RecordingMessageBox.Text = "";
+            }
+        }
+
         public MainPage()
         {
             InitializeComponent();
@@ -47,7 +60,7 @@ namespace OralHistoryRecorder
 
             audioPlayingTimer = new DispatcherTimer();
             audioPlayingTimer.Tick += AudioPlayingTimer_Tick;
-            audioPlayingTimer.Interval = TimeSpan.FromSeconds(1);
+            audioPlayingTimer.Interval = TimeSpan.FromSeconds(150);
         }
 
         private void RestoreToDefault()
@@ -65,6 +78,8 @@ namespace OralHistoryRecorder
             btnEnterTag.IsEnabled = false;
             timeText.Text = RECORDING_MINUTES_LIMIT.ToString();
             PlaybackSlider.Value = 0;
+            RecordingMessageBox.Text = "Click the button to start recording";
+            RecordingAlertMessageBox.Text = "Must not exceed 10 minutes";
             CurrentPositionTextBlock.Text = "00:00";
             PlayText.Text = "Play";
             PlayIcon.Symbol = Symbol.Play;
@@ -87,20 +102,36 @@ namespace OralHistoryRecorder
                 // Pause
                 isPaused = true;
                 audioRecordingTimer.Stop();
+                RecordingMessageBox.Text = "Paused";
                 PauseText.Text = "Resume";
                 PauseIcon.Symbol = Symbol.RepeatAll;
                 stopTime = DateTime.Now;
                 await audioRecorder.PauseRecording();
+
+                // Set up the DispatcherTimer to make the TextBlock blink
+                audioTextBoxTimer = new DispatcherTimer();
+                audioTextBoxTimer.Interval = TimeSpan.FromSeconds(1);
+                audioTextBoxTimer.Tick += Timer_Tick;
+                audioTextBoxTimer.Start();
             }
             else
             {
                 // Resume
                 isPaused = false;
                 audioRecordingTimer.Start();
+                RecordingMessageBox.Text = "Recording...";
                 startedTime += (DateTime.Now - stopTime);
                 PauseText.Text = "Pause";
                 PauseIcon.Symbol = Symbol.Pause;
                 await audioRecorder.ResumeRecording();
+
+                // Stop the blinking on RecordingMessageBox
+                if (audioTextBoxTimer != null)
+                {
+                    audioTextBoxTimer.Stop();
+                    audioTextBoxTimer = null;
+                    RecordingMessageBox.Visibility = Visibility.Visible; // TextBlock is visible when the blinking stops
+                }
             }
         }
 
@@ -110,8 +141,12 @@ namespace OralHistoryRecorder
             {
                 // Start recording
                 isStop = true;
+
+                // Needs fix: timer starts on button press but should start after microphone confirmation is accepted.
                 startedTime = DateTime.Now;
                 DispatcherTimerSetup();
+
+                RecordingMessageBox.Text = "Recording...";
                 RecordingIcon.Symbol = Symbol.Stop;
                 RecordingText.Text = "Stop";
                 btnPauseRecording.IsEnabled = true;
@@ -120,9 +155,23 @@ namespace OralHistoryRecorder
 
             else
             {
+                
                 // Stop recording
+
+                if (isStop == true)
+                {
+                    // Stop the blinking on RecordingMessageBox
+                    if (audioTextBoxTimer != null)
+                    {
+                        audioTextBoxTimer.Stop();
+                        audioTextBoxTimer = null;
+                        RecordingMessageBox.Visibility = Visibility.Visible; // TextBlock is visible when the blinking stops
+                    }
+                }
                 isStop = false;
                 audioRecordingTimer.Stop();
+                RecordingMessageBox.Text = "Recording Stopped.";
+                RecordingAlertMessageBox.Text = "Submit to save your recording or Remove to start over.";
                 timeText.Text = RECORDING_MINUTES_LIMIT.ToString();
                 RecordingIcon.Symbol = Symbol.Microphone;
                 RecordingText.Text = "Start";
@@ -131,7 +180,7 @@ namespace OralHistoryRecorder
                 PauseText.Text = "Pause";
 
                 // Enable audio playing and removing controllers
-                btnPlay.IsEnabled = true;
+                btnStartRecording.IsEnabled = false;
                 btnRemoveRecording.IsEnabled = true;
                 PlaybackSlider.IsEnabled = true;
                 btnEnterTag.IsEnabled = true;
@@ -300,9 +349,11 @@ namespace OralHistoryRecorder
             // Show the message dialog
             await messageDialog.ShowAsync();
 
-
             // Disable Submit button
             btnEnterTag.IsEnabled = false;
+
+            // Display Initial Recording Controllers if user's name was entered
+            nameTextBox_TextChanged(nameTextBox, null);
         }
 
         private void PlaybackSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
