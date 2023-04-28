@@ -263,7 +263,7 @@ namespace OralHistoryRecorder
             ContentDialog successfulSubmissionDialog = new ContentDialog
             {
                 Title = "Successful Submission",
-                Content = "Thanks for your wonderful story. It was successfully submitted.",
+                Content = "Thank you for submitting your story. It was successfully submitted.",
                 CloseButtonText = "Ok",
             };
             await successfulSubmissionDialog.ShowAsync();
@@ -314,8 +314,8 @@ namespace OralHistoryRecorder
                 // Show a message indicating that the file with the provided name has been successfully removed
                 ContentDialog removedFileDialog = new ContentDialog
                 {
-                    Title = $"Removed {Regex.Replace(audioRecorder.audioFileName, @"\d*\.mp3", "")}",
-                    Content = $"{Regex.Replace(audioRecorder.audioFileName, @"\d*\.mp3", "")} has been removed.",
+                    Title = $"Removed recording",
+                    Content = $"Your recording has been removed.",
                     CloseButtonText = "Ok",
                 };
                 await removedFileDialog.ShowAsync();
@@ -334,7 +334,7 @@ namespace OralHistoryRecorder
         private async void btnRemoveRecording_Click(object sender, RoutedEventArgs e)
         {
             // Create the message dialog and set its content
-            var messageDialog = new MessageDialog($"Are you sure you want to remove {Regex.Replace(audioRecorder.audioFileName, @"\d*\.mp3", "")}?");
+            var messageDialog = new MessageDialog($"Are you sure you want to delete your recording?");
 
             // Add commands and set their callbacks
             messageDialog.Commands.Add(new UICommand("Yes", new UICommandInvokedHandler(this.CommandInvokedHandler)));
