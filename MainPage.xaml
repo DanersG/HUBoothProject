@@ -148,15 +148,15 @@
                             SelectionChanged="decadeComboBox_SelectionChanged"
                             SelectedIndex="0"
                               >
-                        <ComboBoxItem Content="1940s"/>
-                        <ComboBoxItem Content="1950s"/>
-                        <ComboBoxItem Content="1960s"/>
-                        <ComboBoxItem Content="1970s"/>
-                        <ComboBoxItem Content="1980s"/>
-                        <ComboBoxItem Content="1990s"/>
-                        <ComboBoxItem Content="2000s"/>
-                        <ComboBoxItem Content="2010s"/>
-                        <ComboBoxItem Content="2020s"/>
+                        <ComboBoxItem Content="1940"/>
+                        <ComboBoxItem Content="1950"/>
+                        <ComboBoxItem Content="1960"/>
+                        <ComboBoxItem Content="1970"/>
+                        <ComboBoxItem Content="1980"/>
+                        <ComboBoxItem Content="1990"/>
+                        <ComboBoxItem Content="2000"/>
+                        <ComboBoxItem Content="2010"/>
+                        <ComboBoxItem Content="2020"/>
                     </ComboBox>
                 </StackPanel>
             </StackPanel>

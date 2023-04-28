@@ -35,7 +35,7 @@ namespace OralHistoryRecorder
         bool isPaused = false;
         bool isPlaying = false;
         StudentRecording student;
-        private TimeSpan RECORDING_MINUTES_LIMIT = TimeSpan.FromMinutes(10);    
+        private TimeSpan RECORDING_MINUTES_LIMIT = TimeSpan.FromMinutes(1);    
 
         //Function to set the interval for TextBox Blinking message while audio is stopped
         private void Timer_Tick(object sender, object e)
@@ -154,8 +154,7 @@ namespace OralHistoryRecorder
             }
 
             else
-            {
-                
+            {  
                 // Stop recording
 
                 if (isStop == true)
@@ -184,6 +183,7 @@ namespace OralHistoryRecorder
                 btnRemoveRecording.IsEnabled = true;
                 PlaybackSlider.IsEnabled = true;
                 btnEnterTag.IsEnabled = true;
+                btnPlay.IsEnabled = true;
                 btnPauseRecording.IsEnabled = false;
                 btnEnterTag.IsEnabled = true;
                 PlaybackSlider.Maximum = timePassed.TotalSeconds;
