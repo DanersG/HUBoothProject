@@ -10,6 +10,8 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using OralHistoryRecorder.ViewModels;
+using Windows.UI;
+using System.Drawing;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -35,7 +37,7 @@ namespace OralHistoryRecorder
         bool isPaused = false;
         bool isPlaying = false;
         StudentRecording student;
-        private TimeSpan RECORDING_MINUTES_LIMIT = TimeSpan.FromMinutes(1);    
+        private TimeSpan RECORDING_MINUTES_LIMIT = TimeSpan.FromMinutes(10);    
 
         //Function to set the interval for TextBox Blinking message while audio is stopped
         private void Timer_Tick(object sender, object e)
@@ -76,7 +78,8 @@ namespace OralHistoryRecorder
             btnRemoveRecording.IsEnabled = false;
             btnPlay.IsEnabled = false;
             btnEnterTag.IsEnabled = false;
-            timeText.Text = RECORDING_MINUTES_LIMIT.ToString();
+            timeText.Text = MakeDigitString(RECORDING_MINUTES_LIMIT.Minutes, 2) + ":" +
+                            MakeDigitString(RECORDING_MINUTES_LIMIT.Seconds, 2);
             PlaybackSlider.Value = 0;
             RecordingMessageBox.Text = "Click the button to start recording";
             RecordingAlertMessageBox.Text = "Must not exceed 10 minutes";
@@ -92,7 +95,6 @@ namespace OralHistoryRecorder
                 PlaybackSlider.Value = audioRecorder.AudioTimePosition.TotalSeconds;
                 CurrentPositionTextBlock.Text = $"{MakeDigitString(audioRecorder.AudioTimePosition.Minutes, 2)}:{MakeDigitString(audioRecorder.AudioTimePosition.Seconds, 2)}";
             }
-
         }
 
         private async void btnPauseRecording_Click(object sender, RoutedEventArgs e)
@@ -156,7 +158,6 @@ namespace OralHistoryRecorder
             else
             {  
                 // Stop recording
-
                 if (isStop == true)
                 {
                     // Stop the blinking on RecordingMessageBox
@@ -171,7 +172,8 @@ namespace OralHistoryRecorder
                 audioRecordingTimer.Stop();
                 RecordingMessageBox.Text = "Recording Stopped.";
                 RecordingAlertMessageBox.Text = "Submit to save your recording or Remove to start over.";
-                timeText.Text = RECORDING_MINUTES_LIMIT.ToString();
+                //timeText.Text = RECORDING_MINUTES_LIMIT.ToString();
+                stopTime = DateTime.Now;
                 RecordingIcon.Symbol = Symbol.Microphone;
                 RecordingText.Text = "Start";
 
@@ -223,7 +225,7 @@ namespace OralHistoryRecorder
         private void DispatcherTimerSetup()
         {
             timeSinceLastStop = RECORDING_MINUTES_LIMIT;
-            timeText.Text = RECORDING_MINUTES_LIMIT.ToString();
+            timeText.Text = "00:00";
             audioRecordingTimer = new DispatcherTimer();
             audioRecordingTimer.Tick += DemoDispatcher_Tick;
             audioRecordingTimer.Start();
@@ -425,18 +427,17 @@ namespace OralHistoryRecorder
         private async void DemoDispatcher_Tick(object sender, object e)
         {
             timePassed = DateTime.Now - startedTime;
-            if (timePassed != RECORDING_MINUTES_LIMIT)
+            if (timePassed < RECORDING_MINUTES_LIMIT)
             {
-                timeText.Text = MakeDigitString((timeSinceLastStop - timePassed).Hours, 2) + ":"
-                    + MakeDigitString((timeSinceLastStop - timePassed).Minutes, 2) + ":"
+                timeText.Text = MakeDigitString((timeSinceLastStop - timePassed).Minutes, 2) + ":"
                     + MakeDigitString((timeSinceLastStop - timePassed).Seconds, 2);
-                    // Milliseconds
-                    //+ ":"
-                    //+ MakeDigitString((timeSinceLastStop - timePassed).Milliseconds, 3);
+
             }
             else
             {
-                await audioRecorder.StopRecording();
+                ((DispatcherTimer)sender).Stop();
+
+                btnStartRecording_Click(true, null);
             }
         }
     }

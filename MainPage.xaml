@@ -180,7 +180,7 @@
                         </StackPanel>
                     </Button>
 
-                    <Border Background="#FFFCDBDB" HorizontalAlignment="Center" CornerRadius="5" Padding="5">
+                    <Border x:Name="TimerBorder" Background="#FFFCDBDB" HorizontalAlignment="Center" CornerRadius="5" Padding="5">
                         <TextBlock x:Name="timeText" Text="10:00" HorizontalAlignment="Center" Foreground="#000008" Padding="5" FontWeight="ExtraBold" FontSize="18"/>
                     </Border>
                 </StackPanel>
