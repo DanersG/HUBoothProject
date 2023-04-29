@@ -24,6 +24,7 @@ using System.Text.RegularExpressions;
 using Windows.UI.Popups;
 using Windows.System;
 using OralHistoryRecorder.ViewModels;
+using Microsoft.Toolkit.Uwp.UI.Controls;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -66,7 +67,7 @@ namespace OralHistoryRecorder
 
             PlaybackSlider.IsEnabled = false;
             btnPlay.IsEnabled = false;
-            CurrentPositionTextBlock.IsTapEnabled = false;
+            //CurrentPositionTextBlock.IsTapEnabled = false;
             btnRemoveRecording.IsEnabled = false;
         }
 
@@ -75,7 +76,7 @@ namespace OralHistoryRecorder
             if (playbackMediaElement.PlaybackSession.Position != TimeSpan.Zero)
             {
                 PlaybackSlider.Value = playbackMediaElement.PlaybackSession.Position.TotalSeconds;
-                CurrentPositionTextBlock.Text = $"{MakeDigitString(playbackMediaElement.PlaybackSession.Position.Minutes, 2)}:{MakeDigitString(playbackMediaElement.PlaybackSession.Position.Seconds, 2)}";
+                //CurrentPositionTextBlock.Text = $"{MakeDigitString(playbackMediaElement.PlaybackSession.Position.Minutes, 2)}:{MakeDigitString(playbackMediaElement.PlaybackSession.Position.Seconds, 2)}";
             }
         }
 
@@ -113,41 +114,6 @@ namespace OralHistoryRecorder
 
         }
 
-
-        private void recordingsDisplayer_SelectionChanged(object sender, TappedRoutedEventArgs e)
-        {
-            //  Enabling audio player buttons:
-            PlaybackSlider.IsEnabled = true;
-            btnPlay.IsEnabled = true;
-            CurrentPositionTextBlock.IsTapEnabled = true;
-            btnRemoveRecording.IsEnabled = true;
-
-            //  Setting current selected item:
-            currRecSelected = ((sender as GridView).SelectedItem as StudentRecording).Title;
-            curRecDuration = ((sender as GridView).SelectedItem as StudentRecording).duration;
-            currIndex = (sender as GridView).SelectedIndex;
-
-            PlaybackSlider.Maximum = curRecDuration.TotalSeconds;
-
-            //  If the selection has changed the audio must be stopped:
-            if (isPlaying != false)
-            {
-                PlayText.Text = "Play";
-                PlayIcon.Symbol = Symbol.Play;
-                isPlaying = false;
-                audioPlayingTimer.Stop();
-                //audioRecorder.StopPlaying();
-                playbackMediaElement.Pause();
-
-                //  RESETTING CONTROLS
-                playbackMediaElement.PlaybackSession.Position = TimeSpan.Zero;
-                PlaybackSlider.Value = playbackMediaElement.PlaybackSession.Position.TotalSeconds;
-                CurrentPositionTextBlock.Text = $"{MakeDigitString(0, 2)}:{MakeDigitString(0, 2)}";
-            }
-
-
-
-        }
 
         private void AddRange(ObservableCollection<StudentRecording> collection, List<StudentRecording> items)
         {
@@ -205,12 +171,55 @@ namespace OralHistoryRecorder
             }
         }
 
+        private void recordingsDisplayer_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+            //  Enabling audio player buttons:
+            PlaybackSlider.IsEnabled = true;
+            btnPlay.IsEnabled = true;
+            // CurrentPositionTextBlock.IsTapEnabled = true;
+            btnRemoveRecording.IsEnabled = true;
+
+            //  Setting current selected item:
+            currRecSelected = ((sender as DataGrid).SelectedItem as StudentRecording).Title;
+            curRecDuration = ((sender as DataGrid).SelectedItem as StudentRecording).duration;
+            currIndex = (sender as DataGrid).SelectedIndex;
+
+            PlaybackSlider.Maximum = curRecDuration.TotalSeconds;
+
+            //  If the selection has changed the audio must be stopped:
+            btnStop_Click();
+        }
+
         private async Task InitializeAsync()
         {
             var tempList = await RecordingManager.retrieveRecordings();
             AddRange(studentRecordingList, tempList);
         }
 
+        private async void directoryBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var folder = await StorageFolder.GetFolderFromPathAsync(ApplicationData.Current.LocalFolder.Path);
+
+            // Launch the folder in the File Explorer
+            var options = new FolderLauncherOptions();
+            options.ItemsToSelect.Add(folder);
+            await Launcher.LaunchFolderAsync(folder, options);
+        }
+
+        private async void refreshBtn_Click(object sender, RoutedEventArgs e)
+        {
+            studentRecordingList.Clear();
+            var tempList = await RecordingManager.retrieveRecordings();
+            AddRange(studentRecordingList, tempList);
+        }
+
+        private async void LogOut(object sender, RoutedEventArgs e)
+        {
+            var messageDialog = new MessageDialog("Logged Out Succesfully!\n    Have a great day!");
+            await messageDialog.ShowAsync();
+
+            this.Frame.Navigate(typeof(UserSelectionPage));
+        }
 
         private async Task playRecording(CoreDispatcher dispatcher)
         {
@@ -226,6 +235,24 @@ namespace OralHistoryRecorder
                 //playbackMediaElement.SetSource(stream, storageFile.FileType);
                 playbackMediaElement.Play();
             });
+        }
+
+        private async void btnStop_Click()
+        {
+            if (isPlaying != false)
+            {
+                PlayText.Text = "Play";
+                PlayIcon.Symbol = Symbol.Play;
+                isPlaying = false;
+                audioPlayingTimer.Stop();
+                //audioRecorder.StopPlaying();
+                playbackMediaElement.Pause();
+
+                //  RESETTING CONTROLS
+                playbackMediaElement.PlaybackSession.Position = TimeSpan.Zero;
+                PlaybackSlider.Value = playbackMediaElement.PlaybackSession.Position.TotalSeconds;
+                //CurrentPositionTextBlock.Text = $"{MakeDigitString(0, 2)}:{MakeDigitString(0, 2)}";
+            }
         }
 
         private async void btnPlay_Click(object sender, RoutedEventArgs e)
@@ -248,7 +275,7 @@ namespace OralHistoryRecorder
                 //audioRecorder.StopPlaying();
                 audioPlayingTimer.Stop();
                 playbackMediaElement.PlaybackSession.Position = TimeSpan.Zero;
-                CurrentPositionTextBlock.Text = CurrentPositionTextBlock.Text = $"{MakeDigitString(0, 2)}:{MakeDigitString(0, 2)}";
+                //CurrentPositionTextBlock.Text = CurrentPositionTextBlock.Text = $"{MakeDigitString(0, 2)}:{MakeDigitString(0, 2)}";
                 PlaybackSlider.Value = playbackMediaElement.PlaybackSession.Position.TotalSeconds;
                 playbackMediaElement.Pause();
             }

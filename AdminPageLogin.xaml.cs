@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+//using System.Net.Mail;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -15,84 +17,231 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
+using MailKit.Net.Smtp;
+using MailKit;
+using MimeKit;
 
 namespace OralHistoryRecorder
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class AdminPageLogin : Page
     {
-        private List<UserTemplate> users;
+        #region Cason's Code
+
+        // -----------------------------------------
+        //      HU HISTORY BOOTH GMAIL ACCOUNT   
+        // -----------------------------------------
+        // username: hu.history.booth@gmail.com    
+        // password: HistoryBoothHU!               
+        // TODO: change phone number and recovery
+        //       email address on google account
+        // -----------------------------------------
+
+
+
+        // TODO: get Brackett Library or laing email
+        private string adminEmail = "klaing@harding.edu";
+
+        // default password
+        private string adminPassword = "password";
+
         public AdminPageLogin()
         {
-            users = new List<UserTemplate>();
             this.InitializeComponent();
-            users.Add(new UserTemplate { username = "klaing", password = "H12345678" });
-            users.Add(new UserTemplate { username = "test", password = "test" });
-            users.Add(new UserTemplate { username = "test", password = "test" });
+            adminPassword = (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["AdminPassword"];
         }
 
-
-        private void SendEmail(string emailTo, string emailFrom, string emailSubject, string emailBody)
+        private void loginButton_Click(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private async void yesButton_Click(object sender, RoutedEventArgs e)
-        {
-            // create code and send email to admin
-            Random rnd = new Random();
-            int code = rnd.Next(1000,9999);
-            // wait for admin to enter code
-
-            var resetCodeDialogBox = new ContentDialog()
-            {
-                Content = new TextBox()
-                {
-                    PlaceholderText = "Reset code"
-                },
-                IsPrimaryButtonEnabled = true,
-                PrimaryButtonText = "OK",
-            };
-
-            await resetCodeDialogBox.ShowAsync();
-
-            // if entered code is equal to reset code
-            // prompt admin to change password
-
-            // need new authentication code from SMTP to work
-        }
-
-      
-
-        private async void loginButton_Click(object sender, RoutedEventArgs e)
-        {
-            var tempUser = new UserTemplate { username = userNameTextBox.Text, password = adminPasswordBox.Password };
-
-            var isUser = users.Where(user => (user.username == tempUser.username && user.password == tempUser.password));
-
-            if (isUser.Any())
+            if (adminPasswordBox.Password == adminPassword)
             {
                 this.Frame.Navigate(typeof(AdminPage));
             }
-
             else
             {
-                ContentDialog errorDialog = new ContentDialog
-                {
-                    Title = "Invalid credentials",
-                    Content = "The username or password entered is incorrect!",
-                    CloseButtonText = "OK"
-
-                };
-
-                // Show the error prompt page to the user
-                await errorDialog.ShowAsync();
-
+                displayWrongPasswordDialog();
             }
         }
+
+        private void passwordBox_KeyDown(object sender, KeyRoutedEventArgs e)
+        {
+            if (e.Key == Windows.System.VirtualKey.Enter)
+            {
+                loginButton_Click(sender, e);
+            }
+        }
+
+        private async void displayWrongPasswordDialog()
+        {
+            ContentDialog dialogBox = new ContentDialog();
+            dialogBox.Title = "Incorrect Password";
+            dialogBox.Content = "The password you entered does not match our records.\n" +
+                "Please try again or click 'Forgot Password' to reset.";
+
+            dialogBox.IsPrimaryButtonEnabled = true;
+            dialogBox.PrimaryButtonText = "OK";
+
+            await dialogBox.ShowAsync();
+        }
+
+        private void SendEmail(string emailTo, string emailSubject, string emailBody)
+        {
+            // SMTP Guide Used --> https://mailtrap.io/blog/csharp-send-email-gmail/
+            string emailFrom = "hu.history.booth@gmail.com";
+
+            // this is an app specific SMTP password
+            string emailFromPassword = "vakkcvucemwnoukp";
+            // the actual login password located at the top of this file
+
+            #region Setup+SendEmail
+
+            var email = new MimeMessage();
+
+            email.From.Add(new MailboxAddress("HU History Booth", emailFrom));
+            email.To.Add(new MailboxAddress("Admin", emailTo));
+
+            email.Subject = emailSubject;
+            email.Body = new TextPart(MimeKit.Text.TextFormat.Text)
+            {
+                Text = emailBody
+            };
+
+            using (var smtp = new SmtpClient())
+            {
+                smtp.Connect("smtp.gmail.com", 587, false);
+
+                // Note: only needed if the SMTP server requires authentication
+                smtp.Authenticate(emailFrom, emailFromPassword);
+
+                smtp.Send(email);
+                smtp.Disconnect(true);
+            }
+
+            #endregion
+        }
+
+        private async void forgotPasswordButton_Click(object sender, RoutedEventArgs e)
+        {
+            #region Generate+SendResetCode
+
+            // generate random 4 digit number for reset code
+            Random random = new Random();
+            int resetCode = random.Next(1000, 9999);
+
+            // send reset code to admins email            
+            string emailSubject = "Password Reset Code";
+            string emailBody = ("Your password reset code for the HU History Booth is: [" + resetCode + "]");
+            SendEmail(adminEmail, emailSubject, emailBody);
+
+            #endregion
+
+            #region PromptUserForResetCode
+
+            var textBlock = new TextBlock()
+            {
+                Text = "A new reset code has been sent to the admin's email.\nCheck your spam folder if not found.\nPlease enter the code below:",
+                Margin = new Thickness(5, 5, 5, 5)
+            };
+
+            var textBox = new TextBox()
+            {
+                Height = 33,
+                Width = 90,
+                MaxLength = 4,
+                Margin = new Thickness(5, 15, 5, 0)
+            };
+
+            var stackPanel = new StackPanel()
+            {
+                Children = { textBlock, textBox }
+            };
+
+            ContentDialog dialogBox = new ContentDialog()
+            {
+                Title = "Forgot Password",
+                Content = stackPanel,
+                PrimaryButtonText = "OK",
+                SecondaryButtonText = "Cancel"
+            };
+            var result = await dialogBox.ShowAsync();
+
+            #endregion
+
+            #region CaptureUserCode
+
+            int userCode = -1;
+
+            // if text box is not empty
+            if (textBox.Text != "" && result == ContentDialogResult.Primary)
+            {
+                // check to make sure user has only entered digits
+                bool validInput = true;
+                for (int i = 0; i < textBox.Text.Length; i++)
+                {
+                    if (!char.IsDigit(textBox.Text[i]))
+                    {
+                        validInput = false;
+                    }
+                }
+
+                // capture code that user entered
+                if (validInput)
+                {
+                    userCode = Int32.Parse(textBox.Text);
+                }
+                else
+                {
+                    // if userCode remains -1, it will not display incorrect code dialog box
+                    // so set userCode to an invalid number so dialog box displays for user
+                    userCode = 0000;
+                }
+            }
+
+            #endregion
+
+            #region HandlePasswordReset
+
+            if (userCode == resetCode)
+            {
+                // enforce one-time use of the code
+                resetCode = 0;
+
+                // prompt user for new admin password
+                dialogBox.Title = "Admin Password Reset";
+
+                var passwordBox = new PasswordBox()
+                {
+                    PlaceholderText = "Password...",
+                    MaxLength = 25,
+                    Height = 33
+                };
+
+                dialogBox.Content = passwordBox;
+                await dialogBox.ShowAsync();
+
+                if (passwordBox.Password != "")
+                {
+                    // save admin password
+                    adminPassword = passwordBox.Password;
+                    Windows.Storage.ApplicationData.Current.LocalSettings.Values["AdminPassword"] = adminPassword;
+
+                    emailSubject = "Admin Password Updated!";
+                    emailBody = "Your administrative password for the HU History Booth has just been reset to: \n\n\t\t" + adminPassword;
+                    SendEmail(adminEmail, emailSubject, emailBody);
+                }
+            }
+            else if (userCode != -1)
+            {
+                dialogBox.Title = "Invalid Reset Code";
+                dialogBox.Content = "Failed to reset admin password.\nPlease try again.";
+                dialogBox.IsSecondaryButtonEnabled = false;
+                dialogBox.SecondaryButtonText = "";
+                await dialogBox.ShowAsync();
+            }
+
+            #endregion
+
+        }
+
+        #endregion
     }
 }

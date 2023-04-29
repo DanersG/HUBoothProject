@@ -9,35 +9,27 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition Height="0*"/>
-        </Grid.RowDefinitions>
         <Image Source="/Assets/image 8.jpg" Stretch="Fill"/>
-        <RelativePanel HorizontalAlignment="Center" VerticalAlignment="Top" Height="908" Margin="0,-102,0,0" Width="429">
-            <Rectangle x:Name="rect" RadiusX="50.0" RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignTopWithPanel="True" Height="600" Stroke="Black" Width="429" Fill="#FFD2D5E0" StrokeThickness="8" StrokeLineJoin="Round" StrokeDashCap="Round" Margin="0,299,0,0"/>
-            <TextBlock x:Name="loginTitle" RelativePanel.AlignHorizontalCenterWithPanel="True" Margin="0,345,0,0" TextWrapping="Wrap" Text="Admin Login" RequestedTheme="Light" FontSize="36"/>
-            <TextBox x:Name="userNameTextBox" Margin="150,429,0,0" TextWrapping="Wrap" Width="202" Height="42" FontSize="20" RequestedTheme="Light"/>
-            <TextBlock x:Name="usernameTitle" Margin="20,437,0,0" TextWrapping="Wrap" Text="Username:" FontSize="20" RequestedTheme="Light"/>
-            <TextBlock x:Name="passwordTitle" Margin="20,497,0,0" TextWrapping="Wrap" Text="Password:" FontSize="20" RequestedTheme="Light"/>
-            <Button x:Name="loginButton" Content="Login" Margin="150,619,0,0" Height="46" Width="103" HorizontalAlignment="Center" RequestedTheme="Light" BorderThickness="2,2,2,2" Click="loginButton_Click"/>
-            <PasswordBox x:Name="adminPasswordBox" Margin="150,497,0,0" Height="42" Width="202" PasswordRevealMode="Peek" RequestedTheme="Light" FontSize="20"/>
-            <TextBlock x:Name="errorTitle" HorizontalAlignment="Left" Margin="564,560,0,0" TextWrapping="Wrap" Text="Error" Width="308" FontSize="16" RequestedTheme="Light" Foreground="Red" Visibility="Collapsed"/>
+        <RelativePanel HorizontalAlignment="Center" VerticalAlignment="Center">
 
-            <TextBlock x:Name="forgotPasswordTextBox" Text="Forgot Password" RelativePanel.Below="loginButton" TextAlignment="Center"
-                        Margin="30,15,15,0" Height="30" Foreground="Black"></TextBlock>
-            
+            <!-- MAIN PANEL -->
+            <Rectangle x:Name="rect" Height="300" Width="429" Stroke="Black" RadiusX="50.0" Fill="#FFD2D5E0" StrokeThickness="8" StrokeLineJoin="Round" StrokeDashCap="Round"
+                       RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignHorizontalCenterWithPanel="True"/>
 
-            <Button x:Name="yesButton" Content="Yes" 
-                    RelativePanel.RightOf="forgotPasswordTextBox"
-                    RelativePanel.Below="loginButton"
-                    Margin="0,10,10,0" Click="yesButton_Click" Foreground="Black" Background="#FFA8AAB3"/>
-            
+            <!-- TITLE -->
+            <TextBlock x:Name="loginTitle" RelativePanel.AlignHorizontalCenterWithPanel="True" Text="Admin Login" RequestedTheme="Light" FontSize="36" Margin="0,50,0,30"/>
 
+            <!-- PASSWORD -->
+            <StackPanel Orientation="Horizontal" RelativePanel.Below="loginTitle" x:Name="passwordStackPanel" RelativePanel.AlignHorizontalCenterWithPanel="True" Margin="0,0,0,30">
+                <PasswordBox x:Name="adminPasswordBox" Height="42" Width="202" PasswordRevealMode="Peek" RequestedTheme="Light" FontSize="20" Margin="0,0,0,0" PlaceholderText="Password" KeyDown="passwordBox_KeyDown"/>
+            </StackPanel>
 
-           
+            <!-- LOGIN BUTTON & FORGOT PASSWORD BUTTONS -->
+            <StackPanel Orientation="Horizontal" RelativePanel.Below="passwordStackPanel" RelativePanel.AlignHorizontalCenterWithPanel="True">
+                <Button x:Name="loginButton" Content="Login" Height="35" Width="123" RequestedTheme="Light" BorderThickness="2,2,2,2" Click="loginButton_Click"  RelativePanel.AlignHorizontalCenterWithPanel="True" Margin="0,0,10,0"/>
+                <Button x:Name="forgotPasswordButton" Content="Forgot Password" Height="35" Foreground="Black" Click="forgotPasswordButton_Click" Background="#FFA8AAB3" RelativePanel.AlignHorizontalCenterWithPanel="True" Margin="10,0,0,0"/>
+            </StackPanel>
 
-            
         </RelativePanel>
     </Grid>
 </Page>
