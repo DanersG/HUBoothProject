@@ -40,11 +40,18 @@
           HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
           >
 
-        
+
         <StackPanel>
-            <RelativePanel HorizontalAlignment="Right">
-                <Button x:Name="directoryBtn" CornerRadius="5"
-                                VerticalAlignment="Center" Margin="150,0,0,0" Click="directoryBtn_Click">
+            <RelativePanel>
+                <Button x:Name="LogOutBtn" CornerRadius="5" RelativePanel.AlignLeftWithPanel="True"
+                                VerticalAlignment="Center" Margin="15,15,0,0" Click="LogOut">
+                    <StackPanel Orientation="Horizontal">
+                        <SymbolIcon x:Name="LoutIcon" Symbol="Home"/>
+                        <TextBlock x:Name="lOutText" Text="LogOut"/>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="directoryBtn" CornerRadius="5" RelativePanel.AlignRightWithPanel="True"
+                                VerticalAlignment="Center" Margin="15,15,15,0" Click="directoryBtn_Click">
                 <StackPanel Orientation="Horizontal">
                     <SymbolIcon x:Name="dirIcon" Symbol="Folder"/>
                     <TextBlock x:Name="dirText" Text="Local"/>
@@ -53,8 +60,8 @@
 
 
                 <Button Name="refreshBtn" CornerRadius="5"
-                                    Margin="20,0,0,0" RelativePanel.RightOf="directoryBtn"
-                                    VerticalAlignment="Center">
+                                    Margin="20,15,0,0" RelativePanel.LeftOf="directoryBtn"
+                                    VerticalAlignment="Center" Click="refreshBtn_Click">
                     <StackPanel Orientation="Horizontal">
                         <SymbolIcon Name="refIcon" Symbol="Refresh"/>
                         <TextBlock Name="refText" Text="Refresh"/>
