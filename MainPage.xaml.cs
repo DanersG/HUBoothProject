@@ -266,7 +266,7 @@ namespace OralHistoryRecorder
             {
                 Title = "Successful Submission",
                 Content = "Thank you for submitting your story. It was successfully submitted.",
-                CloseButtonText = "Ok",
+                CloseButtonText = "OK",
             };
             await successfulSubmissionDialog.ShowAsync();
             this.Frame.Navigate(typeof(UserSelectionPage));
@@ -318,7 +318,7 @@ namespace OralHistoryRecorder
                 {
                     Title = $"Removed recording",
                     Content = $"Your recording has been removed.",
-                    CloseButtonText = "Ok",
+                    CloseButtonText = "OK",
                 };
                 await removedFileDialog.ShowAsync();
 
@@ -431,8 +431,7 @@ namespace OralHistoryRecorder
             {
                 timeText.Text = MakeDigitString((timeSinceLastStop - timePassed).Minutes, 2) + ":"
                     + MakeDigitString((timeSinceLastStop - timePassed).Seconds, 2);
-
-            }
+            }          
             else
             {
                 ((DispatcherTimer)sender).Stop();

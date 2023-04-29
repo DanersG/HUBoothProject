@@ -125,9 +125,6 @@
     <Compile Include="AdminPageLogin.xaml.cs">
       <DependentUpon>AdminPageLogin.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AdminPassPage.xaml.cs">
-      <DependentUpon>AdminPassPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
@@ -181,10 +178,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AdminPageLogin.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="AdminPassPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
