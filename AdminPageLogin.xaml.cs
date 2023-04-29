@@ -138,7 +138,7 @@ namespace OralHistoryRecorder
 
             var textBlock = new TextBlock()
             {
-                Text = "A new reset code has been sent to the admin's email.\nCheck your spam folder if not found.\nPlease enter the code below:",
+                Text = $"A new reset code has been sent to the admin's email: {adminEmail} \nCheck your spam folder if not found.\nPlease enter the code below:",
                 Margin = new Thickness(5, 5, 5, 5)
             };
 
