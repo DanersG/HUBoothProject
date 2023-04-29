@@ -37,64 +37,64 @@
 
     <Grid ScrollViewer.VerticalScrollBarVisibility="Auto" 
           ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-          Width="auto" Height="auto">
+          HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+          >
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="100"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200" />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
-
-        <GridView x:Name="recordingsDisplayer" ItemsSource="{x:Bind studentRecordingList}" Tapped="recordingsDisplayer_SelectionChanged">
-
-            <GridView.ItemTemplate>
-                <DataTemplate x:DataType="data:StudentRecording">
-                    <RelativePanel>
-                        <StackPanel Background="LightGray" Width="200">
-                            <TextBlock Text="{x:Bind Title}" Foreground="Black"/>
-                            <TextBlock Text="{x:Bind tag}"  Foreground="Black"/>
-                            <TextBlock Text="{x:Bind duration}"  Foreground="Black"/>
-                            <TextBlock Text="{x:Bind decade}"  Foreground="Black"/>
-                        </StackPanel>
-                    </RelativePanel>
-                </DataTemplate>
-            </GridView.ItemTemplate>
-        </GridView>
-        <Slider Name="PlaybackSlider" HorizontalAlignment="Stretch" 
-                VerticalAlignment="Top" Margin="0,100,0,0" ValueChanged="PlaybackSlider_ValueChanged" 
-                Minimum="0"  Grid.Column="1"/>
-        <TextBlock x:Name="CurrentPositionTextBlock"
-                   VerticalAlignment="Center" Margin="100,0,0,650"
-                    Text="00:00" Grid.Column="1" 
-                    Grid.RowSpan="2"/>
-        <Button x:Name="btnPlay" Click="btnPlay_Click" CornerRadius="5"
-                Margin="0,0,0,550" Grid.Column="1" 
-                VerticalAlignment="Center">
-            <StackPanel Orientation="Horizontal">
-                <SymbolIcon x:Name="PlayIcon" Symbol="Play"/>
-                <TextBlock x:Name="PlayText" Text="Play" SelectionChanged="PlayText_SelectionChanged"/>
-            </StackPanel>
-        </Button>
-
-        <Button Name="btnRemoveRecording" Click="btnRemoveRecording_Click" CornerRadius="5"
-                Margin="160,0,0,550" Grid.Column="1" 
-                VerticalAlignment="Center">
-            <StackPanel Orientation="Horizontal">
-                <SymbolIcon Name="RemoveIcon" Symbol="Delete"/>
-                <TextBlock Name="RemoveText" Text="Remove"/>
-            </StackPanel>
-        </Button>
         
-        <controls:DataGrid x:Name="dataGrid">
+        <StackPanel>
+            <RelativePanel HorizontalAlignment="Right">
+                <Button x:Name="directoryBtn" CornerRadius="5"
+                                VerticalAlignment="Center" Margin="150,0,0,0" Click="directoryBtn_Click">
+                <StackPanel Orientation="Horizontal">
+                    <SymbolIcon x:Name="dirIcon" Symbol="Folder"/>
+                    <TextBlock x:Name="dirText" Text="Local"/>
+                </StackPanel>
+                </Button>
 
-        </controls:DataGrid>
+
+                <Button Name="refreshBtn" CornerRadius="5"
+                                    Margin="20,0,0,0" RelativePanel.RightOf="directoryBtn"
+                                    VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal">
+                        <SymbolIcon Name="refIcon" Symbol="Refresh"/>
+                        <TextBlock Name="refText" Text="Refresh"/>
+                    </StackPanel>
+                </Button>
+            </RelativePanel>
+
+            <controls:DataGrid x:Name="recordingsDisplayer" ItemsSource="{x:Bind studentRecordingList}"
+                               AlternatingRowBackground="LightGray" AlternatingRowForeground="Black"
+                               Height="600" Width="1500" RelativePanel.AlignTopWithPanel="True" 
+                               SelectionChanged="recordingsDisplayer_SelectionChanged_1" 
+                               CanUserReorderColumns="True">
+            </controls:DataGrid>
+
+            <RelativePanel HorizontalAlignment="Center" VerticalAlignment="Bottom">
+
+                <Slider Name="PlaybackSlider" Width="500" RelativePanel.AlignHorizontalCenterWithPanel="True"
+                                VerticalAlignment="Top" Margin="0,100,0,0" ValueChanged="PlaybackSlider_ValueChanged" 
+                                Minimum="0"  Grid.Column="1"/>
+
+                <Button x:Name="btnPlay" Click="btnPlay_Click" CornerRadius="5"
+                                VerticalAlignment="Center" Margin="150,0,0,0">
+                    <StackPanel Orientation="Horizontal">
+                        <SymbolIcon x:Name="PlayIcon" Symbol="Play"/>
+                        <TextBlock x:Name="PlayText" Text="Play"/>
+                    </StackPanel>
+                </Button>
+
+
+                <Button Name="btnRemoveRecording" Click="btnRemoveRecording_Click" CornerRadius="5"
+                                Margin="50,0,0,550" RelativePanel.RightOf="btnPlay"
+                                VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal">
+                        <SymbolIcon Name="RemoveIcon" Symbol="Delete"/>
+                        <TextBlock Name="RemoveText" Text="Remove"/>
+                    </StackPanel>
+                </Button>
+            </RelativePanel>
+
+        </StackPanel>
+
     </Grid>
-
-
-
-
-
 </Page>
