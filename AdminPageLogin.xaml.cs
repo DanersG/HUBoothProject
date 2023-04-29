@@ -32,22 +32,27 @@ namespace OralHistoryRecorder
         // -----------------------------------------
         // username: hu.history.booth@gmail.com    
         // password: HistoryBoothHU!               
-        // TODO: change phone number and recovery
-        //       email address on google account
         // -----------------------------------------
 
-
-
-        // TODO: get Brackett Library or laing email
+        // admin email for password reset
         private string adminEmail = "klaing@harding.edu";
-
-        // default password
-        private string adminPassword = "password";
+        private string adminPassword;
 
         public AdminPageLogin()
         {
             this.InitializeComponent();
-            adminPassword = (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["AdminPassword"];
+
+            // if custom password exists...
+            if (Windows.Storage.ApplicationData.Current.LocalSettings.Values.ContainsKey("AdminPassword"))
+            {
+               // retrieve stored password
+               adminPassword = (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["AdminPassword"];
+            }
+            else 
+            {
+                // otherwise set to default password
+                adminPassword = "password";
+            }
         }
 
         private void loginButton_Click(object sender, RoutedEventArgs e)
