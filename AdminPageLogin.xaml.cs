@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Media.Protection;
 using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -34,65 +35,38 @@ namespace OralHistoryRecorder
             users.Add(new UserTemplate { username = "test", password = "test" });
         }
 
-        private void yesButton_Click(object sender, RoutedEventArgs e)
+
+        private void SendEmail(string emailTo, string emailFrom, string emailSubject, string emailBody)
         {
-            createPassInst.Visibility = Visibility.Visible;
-            setUpButton.Visibility = Visibility.Visible;
-            setUpButton.Focus(FocusState.Programmatic);
-            prevPasswordBox.Visibility = Visibility.Visible;
-            newPasswordBox.Visibility = Visibility.Visible;
+
         }
 
-        private void noButton_Click(object sender, RoutedEventArgs e)
+        private async void yesButton_Click(object sender, RoutedEventArgs e)
         {
-            adminPasswordBox.Focus(FocusState.Programmatic);
+            // create code and send email to admin
+            Random rnd = new Random();
+            int code = rnd.Next(1000,9999);
+            // wait for admin to enter code
 
-            if (createPassInst.Visibility != Visibility.Collapsed)
+            var resetCodeDialogBox = new ContentDialog()
             {
-                createPassInst.Visibility = Visibility.Collapsed;
-                setUpButton.Visibility = Visibility.Collapsed;
-
-                prevPasswordBox.Visibility = Visibility.Collapsed;
-                newPasswordBox.Visibility = Visibility.Collapsed;
-            }
-        }
-
-
-        //Change Password Functionality:
-
-        private async void setUpButton_Click(object sender, RoutedEventArgs e)
-        {
-            createPassInst.Visibility = Visibility.Collapsed;
-            setUpButton.Visibility = Visibility.Collapsed;
-
-
-            if (userNameTextBox.Text != "" && adminPasswordBox.Password != "")
-            {
-                users.Add(new UserTemplate { username = userNameTextBox.Text, password = adminPasswordBox.Password });
-
-                ContentDialog userCreated = new ContentDialog
+                Content = new TextBox()
                 {
-                    Title = "Successful",
-                    Content = "The username and password were created succesfully",
-                    CloseButtonText = "OK"
-                };
+                    PlaceholderText = "Reset code"
+                },
+                IsPrimaryButtonEnabled = true,
+                PrimaryButtonText = "OK",
+            };
 
-                await userCreated.ShowAsync();
-            }
-            else
-            {
-                ContentDialog creationErr = new ContentDialog
-                {
-                    Title = "Error",
-                    Content = "You must have a username or password. Try again.",
-                    CloseButtonText = "OK"
-                };
+            await resetCodeDialogBox.ShowAsync();
 
-                await creationErr.ShowAsync();
-            }
+            // if entered code is equal to reset code
+            // prompt admin to change password
 
-
+            // need new authentication code from SMTP to work
         }
+
+      
 
         private async void loginButton_Click(object sender, RoutedEventArgs e)
         {

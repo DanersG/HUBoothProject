@@ -24,42 +24,20 @@
             <PasswordBox x:Name="adminPasswordBox" Margin="150,497,0,0" Height="42" Width="202" PasswordRevealMode="Peek" RequestedTheme="Light" FontSize="20"/>
             <TextBlock x:Name="errorTitle" HorizontalAlignment="Left" Margin="564,560,0,0" TextWrapping="Wrap" Text="Error" Width="308" FontSize="16" RequestedTheme="Light" Foreground="Red" Visibility="Collapsed"/>
 
-
-            <TextBlock x:Name="passQuestion" Text="Would you like to change the password?"
-                        TextAlignment="Center"
-                        Margin="30,15,15,0" Height="30"
-                        RelativePanel.Below="loginButton" Foreground="Black"/>
+            <TextBlock x:Name="forgotPasswordTextBox" Text="Forgot Password" RelativePanel.Below="loginButton" TextAlignment="Center"
+                        Margin="30,15,15,0" Height="30" Foreground="Black"></TextBlock>
+            
 
             <Button x:Name="yesButton" Content="Yes" 
-                    RelativePanel.RightOf="passQuestion"
+                    RelativePanel.RightOf="forgotPasswordTextBox"
                     RelativePanel.Below="loginButton"
                     Margin="0,10,10,0" Click="yesButton_Click" Foreground="Black" Background="#FFA8AAB3"/>
-            <Button x:Name="noButton" Content="No" 
-                    RelativePanel.RightOf="yesButton" Margin="0,10,10,0"
-                    RelativePanel.Below="loginButton" Click="noButton_Click" Foreground="Black" Background="#FFA8AAB3"/>
+            
 
 
-            <TextBlock x:Name="createPassInst" TextWrapping="WrapWholeWords" Text="Type previous and new password to confirm"
-                       Width="295" RelativePanel.Below="passQuestion" Margin="0,5,0,0" Visibility="Collapsed"
-                       RelativePanel.AlignHorizontalCenterWithPanel="True" Foreground="Black"/>
+           
 
-            <PasswordBox x:Name="prevPasswordBox" Height="42" Width="202"
-                         PlaceholderText="Previous Password..." Visibility="Collapsed"
-                         PasswordRevealMode="Peek" RequestedTheme="Light" FontSize="20"
-                         RelativePanel.Below="createPassInst"
-                         RelativePanel.AlignHorizontalCenterWithPanel="True"/>
-
-            <PasswordBox x:Name="newPasswordBox" Height="42" Width="202" Margin="0,10,0,0" 
-                         PasswordRevealMode="Peek" PlaceholderText="New Password..." RequestedTheme="Light" FontSize="20" Visibility="Collapsed"
-                         RelativePanel.Below="prevPasswordBox"
-                         RelativePanel.AlignHorizontalCenterWithPanel="True"/>
-
-            <Button x:Name="setUpButton" Content="Set Password"
-                    RelativePanel.Below="newPasswordBox" Visibility="Collapsed"
-                    RelativePanel.AlignHorizontalCenterWithPanel="True"
-                    Click="setUpButton_Click"
-                    Height="30" Width="110" Margin="0,10,0,0" Foreground="Black" 
-                    Background="#FFA8AAB3"/>
+            
         </RelativePanel>
     </Grid>
 </Page>
