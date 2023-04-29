@@ -36,8 +36,10 @@ namespace OralHistoryRecorder
         //       email address on google account
         // -----------------------------------------
 
+
+
         // TODO: get Brackett Library or laing email
-        private string adminEmail = "ckirschner@harding.edu";
+        private string adminEmail = "klaing@harding.edu";
 
         // default password
         private string adminPassword = "password";
