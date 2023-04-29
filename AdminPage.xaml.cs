@@ -206,6 +206,21 @@ namespace OralHistoryRecorder
             await Launcher.LaunchFolderAsync(folder, options);
         }
 
+        private async void refreshBtn_Click(object sender, RoutedEventArgs e)
+        {
+            studentRecordingList.Clear();
+            var tempList = await RecordingManager.retrieveRecordings();
+            AddRange(studentRecordingList, tempList);
+        }
+
+        private async void LogOut(object sender, RoutedEventArgs e)
+        {
+            var messageDialog = new MessageDialog("Logged Out Succesfully!\n    Have a great day!");
+            await messageDialog.ShowAsync();
+
+            this.Frame.Navigate(typeof(UserSelectionPage));
+        }
+
         private async Task playRecording(CoreDispatcher dispatcher)
         {
             await dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
