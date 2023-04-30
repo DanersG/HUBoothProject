@@ -32,20 +32,27 @@ namespace OralHistoryRecorder
         // -----------------------------------------
         // username: hu.history.booth@gmail.com    
         // password: HistoryBoothHU!               
-        // TODO: change phone number and recovery
-        //       email address on google account
         // -----------------------------------------
 
-        // TODO: get Brackett Library or laing email
-        private string adminEmail = "ckirschner@harding.edu";
-
-        // default password
-        private string adminPassword = "password";
+        // admin email for password reset
+        private string adminEmail = "klaing@harding.edu";
+        private string adminPassword;
 
         public AdminPageLogin()
         {
             this.InitializeComponent();
-            adminPassword = (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["AdminPassword"];
+
+            // if custom password exists...
+            if (Windows.Storage.ApplicationData.Current.LocalSettings.Values.ContainsKey("AdminPassword"))
+            {
+               // retrieve stored password
+               adminPassword = (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["AdminPassword"];
+            }
+            else 
+            {
+                // otherwise set to default password
+                adminPassword = "password";
+            }
         }
 
         private void loginButton_Click(object sender, RoutedEventArgs e)
@@ -136,7 +143,7 @@ namespace OralHistoryRecorder
 
             var textBlock = new TextBlock()
             {
-                Text = "A new reset code has been sent to the admin's email.\nCheck your spam folder if not found.\nPlease enter the code below:",
+                Text = $"A new reset code has been sent to the admin's email: {adminEmail} \nCheck your spam folder if not found.\n\nPlease enter the code below:",
                 Margin = new Thickness(5, 5, 5, 5)
             };
 

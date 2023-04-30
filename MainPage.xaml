@@ -61,12 +61,12 @@
                 <!--Meta data-->
                 <StackPanel>
                     <StackPanel Margin="30">
-                        <TextBlock TextWrapping="Wrap" Text="Full Name:" FontSize="30"/>
-                        <TextBox x:Name="nameTextBox" FontSize="30" HorizontalAlignment="Stretch" PlaceholderText="Enter your name" Style="{StaticResource TextBoxStyle}" TextChanged="nameTextBox_TextChanged"/>
+                        <TextBlock TextWrapping="Wrap" Text="*Full Name:" FontSize="30"/>
+                        <TextBox x:Name="nameTextBox" FontSize="26" HorizontalAlignment="Stretch" PlaceholderText="Enter your name" Style="{StaticResource TextBoxStyle}" TextChanged="nameTextBox_TextChanged"/>
                     </StackPanel>
 
                     <StackPanel Margin="30,16" Orientation="Horizontal" Spacing="25">
-                        <TextBlock TextWrapping="Wrap" FontSize="30" Text="Are you a Student/Alumni?"/>
+                        <TextBlock TextWrapping="Wrap" FontSize="30" Text="*Are you a Student/Alumni?"/>
                         <ToggleButton
                                   x:Name="HardingStudentCheck"
                                   VerticalAlignment="Center"
@@ -86,8 +86,10 @@
                 </StackPanel>
 
                 <!--Tags-->
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5" Spacing="50">
-                    <ToggleButton x:Name="ChapelTag"
+                <StackPanel Orientation="Vertical" Margin="30,16">
+                    <TextBlock TextWrapping="Wrap" FontSize="30" Text="*Select Story Tags:" />
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="50" Margin="0,15">
+                        <ToggleButton x:Name="ChapelTag"
                               HorizontalAlignment="Center" VerticalAlignment="Center"
                               IsChecked="{Binding IsChecked, Mode=TwoWay}"
                               Checked="Tag_Checked"
@@ -95,13 +97,13 @@
                               BorderThickness="1"
                               Unchecked="Tag_Unchecked"
                           >
-                        <StackPanel Orientation="Horizontal">
-                            <SymbolIcon Symbol="Globe"/>
-                            <TextBlock Text="Chapel"/>
-                        </StackPanel>
-                    </ToggleButton>
+                            <StackPanel Orientation="Horizontal" Spacing="5">
+                                <SymbolIcon Symbol="Globe"/>
+                                <TextBlock Text="Chapel" FontSize="24"/>
+                            </StackPanel>
+                        </ToggleButton>
 
-                    <ToggleButton x:Name="DormTag"
+                        <ToggleButton x:Name="DormTag"
                               HorizontalAlignment="Center" VerticalAlignment="Center"
                               IsChecked="{Binding IsChecked, Mode=TwoWay}"
                               Checked="Tag_Checked"
@@ -109,13 +111,13 @@
                               BorderThickness="1"
                               Unchecked="Tag_Unchecked"
                           >
-                        <StackPanel Orientation="Horizontal">
-                            <SymbolIcon Symbol="Home"/>
-                            <TextBlock Text="Dorm Life"/>
-                        </StackPanel>
-                    </ToggleButton>
+                            <StackPanel Orientation="Horizontal" Spacing="5">
+                                <SymbolIcon Symbol="Home"/>
+                                <TextBlock Text="Dorm Life" FontSize="24"/>
+                            </StackPanel>
+                        </ToggleButton>
 
-                    <ToggleButton x:Name="ClubTag"
+                        <ToggleButton x:Name="ClubTag"
                               HorizontalAlignment="Center" VerticalAlignment="Center"
                               IsChecked="{Binding IsChecked, Mode=TwoWay}"
                               Checked="Tag_Checked"
@@ -123,22 +125,23 @@
                               BorderThickness="1"
                               Unchecked="Tag_Unchecked"
                           >
-                        <StackPanel Orientation="Horizontal">
-                            <SymbolIcon Symbol="People"/>
-                            <TextBlock Text="Club Stuff"/>
-                        </StackPanel>
-                    </ToggleButton>
+                            <StackPanel Orientation="Horizontal" Spacing="5">
+                                <SymbolIcon Symbol="People"/>
+                                <TextBlock Text="Club Stuff" FontSize="24"/>
+                            </StackPanel>
+                        </ToggleButton>
+                    </StackPanel>
                     
                     <!--Custome Tag-->
-                    <StackPanel>
-                        <TextBlock TextWrapping="Wrap" Text="Enter Custom Tag"/>
-                        <TextBox x:Name="enteredCustomTag" TextWrapping="Wrap" PlaceholderText="Custom Tag"/>
+                    <StackPanel Orientation="Horizontal" Margin="30,5">
+                        <TextBlock TextWrapping="Wrap" Text="Enter Custom Tag:" FontSize="26" VerticalAlignment="Center"/>
+                        <TextBox x:Name="enteredCustomTag" TextWrapping="Wrap" PlaceholderText="Custom Tag" Width="260" FontSize="24" Margin="24,0,0,0"/>
                     </StackPanel>
                 </StackPanel>
 
                 <!--Decade-->
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="30">
-                    <TextBlock TextWrapping="Wrap" Text="Select Decade:" FontSize="30"/>
+                <StackPanel Orientation="Horizontal" Spacing="30" Margin="30,16">
+                    <TextBlock TextWrapping="Wrap" Text="*Select Decade:" FontSize="30"/>
                     <ComboBox x:Name="decadeComboBox"
                             Height="45"
                             Width="145"
@@ -165,12 +168,13 @@
             <StackPanel x:Name="RecordingsContainer" Spacing="10" Background="White" RelativePanel.RightOf="GoldContainer" 
                         RelativePanel.AlignRightWithPanel="True" RelativePanel.Below="TitleTextBlock" VerticalAlignment="Center">
                 <!--Recording Controllers-->
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="0,50,0,0">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="0,30,0,0">
                     <TextBlock x:Name="RecordingMessageBox" TextWrapping="Wrap" HorizontalAlignment="Center" Text="Click the button to start recording" FontSize="30"
                                Margin="0,25,0,10" TextAlignment="Center"/>
-                    <TextBlock x:Name="RecordingAlertMessageBox" TextWrapping="Wrap" Text="Must not exceed 10 minutes" HorizontalAlignment="Center" FontSize="26" Foreground="Red"/>
+                    <TextBlock x:Name="RecordingAlertMessageBox" TextWrapping="Wrap" Text="Must not exceed 10 minutes"  Margin="0,0,0,4" HorizontalAlignment="Center" FontSize="26" Foreground="Black"/>
+                    <TextBlock x:Name="TimeOutWarning" TextWrapping="Wrap" Text="" HorizontalAlignment="Center" FontSize="26" Foreground="Red" Margin="0"/>
 
-                    <Button Name="btnStartRecording" Click="btnStartRecording_Click"  CornerRadius="5" HorizontalAlignment="Center" Margin="0,60,0,30" 
+                    <Button Name="btnStartRecording" Click="btnStartRecording_Click"  CornerRadius="5" HorizontalAlignment="Center" Margin="0,40,0,30" 
                             Foreground="White" FontWeight="SemiBold" Background="#FFD72D6C">
                         <StackPanel Orientation="Horizontal" Spacing="5">
                             <Viewbox Width="24">
@@ -180,14 +184,14 @@
                         </StackPanel>
                     </Button>
                     <Border x:Name="TimerBorder" Background="#FFFCDBDB" HorizontalAlignment="Center" CornerRadius="5" Padding="5">
-                        <TextBlock x:Name="timeText" Text="10:00" HorizontalAlignment="Center" Foreground="#000008" Padding="5" FontWeight="ExtraBold" FontSize="18"/>
+                        <TextBlock x:Name="timeText" Text="10:00" HorizontalAlignment="Center" Foreground="#000008" Padding="5" FontWeight="Bold" FontSize="20"/>
                     </Border>
                 </StackPanel>
 
                 <StackPanel>
                     <!--Play Recording Slider-->
-                    <Slider Name="PlaybackSlider" ValueChanged="PlaybackSlider_ValueChanged" Minimum="0" Margin="25,50,25,0"/>
-                    <TextBlock x:Name="CurrentPositionTextBlock" HorizontalAlignment="Center" Text="00:00"/>
+                    <Slider Name="PlaybackSlider" ValueChanged="PlaybackSlider_ValueChanged" Minimum="0" Margin="25,40,25,0"/>
+                    <TextBlock x:Name="CurrentPositionTextBlock" HorizontalAlignment="Center" Text="00:00" FontSize="18"/>
 
                     <!--Playing Controllers-->
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="50" Margin="10">

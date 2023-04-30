@@ -79,13 +79,15 @@ namespace OralHistoryRecorder
             btnPlay.IsEnabled = false;
             btnEnterTag.IsEnabled = false;
             timeText.Text = MakeDigitString(RECORDING_MINUTES_LIMIT.Minutes, 2) + ":" +
-                            MakeDigitString(RECORDING_MINUTES_LIMIT.Seconds, 2);
+                            MakeDigitString(RECORDING_MINUTES_LIMIT.Seconds, 2); // Initial timer display (10:00) 
             PlaybackSlider.Value = 0;
             RecordingMessageBox.Text = "Click the button to start recording";
             RecordingAlertMessageBox.Text = "Must not exceed 10 minutes";
             CurrentPositionTextBlock.Text = "00:00";
             PlayText.Text = "Play";
             PlayIcon.Symbol = Symbol.Play;
+            nameTextBox.IsEnabled = true;
+            TimeOutWarning.Text = "";
         }
 
         private void AudioPlayingTimer_Tick(object sender, object e)
@@ -189,6 +191,7 @@ namespace OralHistoryRecorder
                 btnPauseRecording.IsEnabled = false;
                 btnEnterTag.IsEnabled = true;
                 PlaybackSlider.Maximum = timePassed.TotalSeconds;
+                nameTextBox.IsEnabled = false;
 
                 ++student.RecId;
                 audioRecorder.audioFileName = nameTextBox.Text + student.RecId + ".mp3";
@@ -266,7 +269,7 @@ namespace OralHistoryRecorder
             {
                 Title = "Successful Submission",
                 Content = "Thank you for submitting your story. It was successfully submitted.",
-                CloseButtonText = "OK",
+                CloseButtonText = "Ok",
             };
             await successfulSubmissionDialog.ShowAsync();
             this.Frame.Navigate(typeof(UserSelectionPage));
@@ -318,7 +321,7 @@ namespace OralHistoryRecorder
                 {
                     Title = $"Removed recording",
                     Content = $"Your recording has been removed.",
-                    CloseButtonText = "OK",
+                    CloseButtonText = "Ok",
                 };
                 await removedFileDialog.ShowAsync();
 
@@ -326,10 +329,6 @@ namespace OralHistoryRecorder
                 btnPlay.IsEnabled = false;
                 PauseText.Text = "Pause";
                 PauseIcon.Symbol = Symbol.Pause;
-            }
-            else
-            {
-                // Do nothing
             }
         }
 
@@ -429,13 +428,27 @@ namespace OralHistoryRecorder
             timePassed = DateTime.Now - startedTime;
             if (timePassed < RECORDING_MINUTES_LIMIT)
             {
+                // Timer countdown
                 timeText.Text = MakeDigitString((timeSinceLastStop - timePassed).Minutes, 2) + ":"
                     + MakeDigitString((timeSinceLastStop - timePassed).Seconds, 2);
-            }          
+
+               
+                // Pop-up red texbox when recording is close to limit timer.
+                var remainingTime = RECORDING_MINUTES_LIMIT - timePassed;
+                var remainingSeconds = remainingTime.Seconds;
+                var remainingMinutes = remainingTime.Minutes;
+                if (remainingMinutes == 0 && remainingSeconds <= 59)
+                {
+                    TimeOutWarning.Text = $"You only have {remainingSeconds} seconds left.";
+                }
+                            }
             else
             {
+                // Recording time reached limit
+                // Stop Timer
                 ((DispatcherTimer)sender).Stop();
 
+                // Enable necessary buttons (same as recording stopped/finished)
                 btnStartRecording_Click(true, null);
             }
         }
