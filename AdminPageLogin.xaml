@@ -10,6 +10,16 @@
 
     <Grid>
         <Image Source="/Assets/image 8.jpg" Stretch="Fill"/>
+
+        <Button Name="btnGoHome" Click="btnGoHome_Click" CornerRadius="5" Margin="20" Background="Black" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <StackPanel Orientation="Vertical">
+                <Viewbox Height="25">
+                    <SymbolIcon Name="HomeIcon" Symbol="Home" Foreground="White"/>
+                </Viewbox>
+                <TextBlock Name="Home" Text="Home" FontSize="20" Foreground="White"/>
+            </StackPanel>
+        </Button>
+
         <RelativePanel HorizontalAlignment="Center" VerticalAlignment="Center">
 
             <!-- MAIN PANEL -->
@@ -29,6 +39,8 @@
                 <Button x:Name="loginButton" Content="Login" Height="35" Width="123" RequestedTheme="Light" BorderThickness="2,2,2,2" Click="loginButton_Click"  RelativePanel.AlignHorizontalCenterWithPanel="True" Margin="0,0,10,0"/>
                 <Button x:Name="forgotPasswordButton" Content="Forgot Password" Height="35" Foreground="Black" Click="forgotPasswordButton_Click" Background="#FFA8AAB3" RelativePanel.AlignHorizontalCenterWithPanel="True" Margin="10,0,0,0"/>
             </StackPanel>
+
+            
 
         </RelativePanel>
     </Grid>

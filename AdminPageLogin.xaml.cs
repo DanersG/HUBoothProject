@@ -35,7 +35,7 @@ namespace OralHistoryRecorder
         // -----------------------------------------
 
         // admin email for password reset
-        private string adminEmail = "klaing@harding.edu";
+        private string adminEmail = "ckirschner@harding.edu";
         private string adminPassword;
 
         public AdminPageLogin()
@@ -75,6 +75,11 @@ namespace OralHistoryRecorder
             }
         }
 
+        private void btnGoHome_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.GoBack();
+           
+        }
         private async void displayWrongPasswordDialog()
         {
             ContentDialog dialogBox = new ContentDialog();
