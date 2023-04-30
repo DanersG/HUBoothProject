@@ -81,7 +81,6 @@ namespace OralHistoryRecorder
                 Window.Current.Activate();
             }
         }
-
         private void App_BackRequested(object sender, BackRequestedEventArgs e)
         {
             Frame rootFrame = Window.Current.Content as Frame;
@@ -92,13 +91,8 @@ namespace OralHistoryRecorder
             }
         }
 
-            private void RootFrame_Navigated(object sender, NavigationEventArgs e)
+        private void RootFrame_Navigated(object sender, NavigationEventArgs e)
         {
-            // Determine if Back button should be visible
-            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
-                ((Frame)sender).CanGoBack ?
-                AppViewBackButtonVisibility.Visible :
-                AppViewBackButtonVisibility.Collapsed;
         }
 
         /// <summary>
