@@ -173,21 +173,24 @@ namespace OralHistoryRecorder
 
         private void recordingsDisplayer_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
-            //  Enabling audio player buttons:
-            PlaybackSlider.IsEnabled = true;
-            btnPlay.IsEnabled = true;
-            // CurrentPositionTextBlock.IsTapEnabled = true;
-            btnRemoveRecording.IsEnabled = true;
+            if(studentRecordingList.Count() != 0)
+            {
+                //  Enabling audio player buttons:
+                PlaybackSlider.IsEnabled = true;
+                btnPlay.IsEnabled = true;
+                // CurrentPositionTextBlock.IsTapEnabled = true;
+                btnRemoveRecording.IsEnabled = true;
 
-            //  Setting current selected item:
-            currRecSelected = ((sender as DataGrid).SelectedItem as StudentRecording).Title;
-            curRecDuration = ((sender as DataGrid).SelectedItem as StudentRecording).duration;
-            currIndex = (sender as DataGrid).SelectedIndex;
+                //  Setting current selected item:
+                currRecSelected = ((sender as DataGrid).SelectedItem as StudentRecording).Title;
+                curRecDuration = ((sender as DataGrid).SelectedItem as StudentRecording).duration;
+                currIndex = (sender as DataGrid).SelectedIndex;
 
-            PlaybackSlider.Maximum = curRecDuration.TotalSeconds;
+                PlaybackSlider.Maximum = curRecDuration.TotalSeconds;
 
-            //  If the selection has changed the audio must be stopped:
-            btnStop_Click();
+                //  If the selection has changed the audio must be stopped:
+                btnStop_Click();
+            }
         }
 
         private async Task InitializeAsync()
@@ -208,6 +211,7 @@ namespace OralHistoryRecorder
 
         private async void refreshBtn_Click(object sender, RoutedEventArgs e)
         {
+            btnStop_Click();
             studentRecordingList.Clear();
             var tempList = await RecordingManager.retrieveRecordings();
             AddRange(studentRecordingList, tempList);
@@ -215,6 +219,8 @@ namespace OralHistoryRecorder
 
         private async void LogOut(object sender, RoutedEventArgs e)
         {
+            btnStop_Click();
+
             var messageDialog = new MessageDialog("Logged Out Succesfully!\n    Have a great day!");
             await messageDialog.ShowAsync();
 
@@ -285,5 +291,11 @@ namespace OralHistoryRecorder
         {
             btnPlay.IsEnabled= false;
         }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs args)
+        {
+            btnStop_Click();
+        }
+
     }
 }
