@@ -371,6 +371,12 @@ namespace OralHistoryRecorder
             }
         }
 
+        private void btnGoHome_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.GoBack();
+            Frame.GoBack();
+        }
+
         private void HardingStudentCheck_Unchecked(object sender, RoutedEventArgs e)
         {
             if (HardingStudentCheckIcon != null)

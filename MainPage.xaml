@@ -212,6 +212,18 @@
                 </StackPanel>
             </StackPanel>
 
+
+            <Button Name="btnGoHome" Click="btnGoHome_Click" CornerRadius="5" RelativePanel.AlignLeftWithPanel="True" 
+                                RelativePanel.AlignTopWithPanel="True" Margin="20" Background="Black">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+                    <Viewbox Height="25">
+                        <SymbolIcon Name="HomeIcon" Symbol="Home" Foreground="White"/>
+                    </Viewbox>
+                    <TextBlock Name="Home" Text="Home" FontSize="20" Foreground="White"/>
+                </StackPanel>
+            </Button>
+
+
             <RelativePanel x:Name="SubmitBtnContainer"  RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignLeftWith="RecordingsContainer" 
                            RelativePanel.AlignBottomWithPanel="True" Height="120"> 
                 <!--Delete/Submit-->
