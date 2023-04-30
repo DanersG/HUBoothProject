@@ -321,7 +321,7 @@ namespace OralHistoryRecorder
                 {
                     Title = $"Removed recording",
                     Content = $"Your recording has been removed.",
-                    CloseButtonText = "Ok",
+                    CloseButtonText = "OK",
                 };
                 await removedFileDialog.ShowAsync();
 
@@ -371,10 +371,31 @@ namespace OralHistoryRecorder
             }
         }
 
-        private void btnGoHome_Click(object sender, RoutedEventArgs e)
+        private async void btnGoHome_Click(object sender, RoutedEventArgs e)
         {
-            Frame.GoBack();
-            Frame.GoBack();
+            //TODO: If text box is not null 
+
+            // Create the message dialog and set its content
+            var messageDialog = new MessageDialog($"Are you sure you want to go back to home? Your recording will be deleted.");
+
+            // Add commands and set their callbacks
+            messageDialog.Commands.Add(new UICommand("Yes", new UICommandInvokedHandler(this.CommandInvokedHandler)));
+            messageDialog.Commands.Add(new UICommand("No", new UICommandInvokedHandler(this.CommandInvokedHandler)));
+
+            // Set the command that will be invoked by default
+            messageDialog.DefaultCommandIndex = 0;
+
+            // Set the command to be invoked when escape is pressed
+            messageDialog.CancelCommandIndex = 1;
+
+            // Show the message dialog
+            var result = await messageDialog.ShowAsync();
+
+            if (result.Label == "Yes")
+            {
+                Frame.GoBack();
+                Frame.GoBack();
+            }
         }
 
         private void HardingStudentCheck_Unchecked(object sender, RoutedEventArgs e)
@@ -447,7 +468,8 @@ namespace OralHistoryRecorder
                 {
                     TimeOutWarning.Text = $"You only have {remainingSeconds} seconds left.";
                 }
-                            }
+                            
+            }
             else
             {
                 // Recording time reached limit
