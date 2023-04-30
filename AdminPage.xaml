@@ -73,7 +73,8 @@
                                AlternatingRowBackground="LightGray" AlternatingRowForeground="Black"
                                Height="600" Width="1500" RelativePanel.AlignTopWithPanel="True" 
                                SelectionChanged="recordingsDisplayer_SelectionChanged_1" 
-                               CanUserReorderColumns="True">
+                               CanUserReorderColumns="False" IsReadOnly="True"
+                               >
             </controls:DataGrid>
 
             <RelativePanel HorizontalAlignment="Center" VerticalAlignment="Bottom">
