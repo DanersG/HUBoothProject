@@ -10,13 +10,13 @@
   <Identity
     Name="f6ba6af8-9a0d-4b6e-b45c-6331257c5c5b"
     Publisher="CN=nalfaro"
-    Version="1.0.0.0" />
+    Version="1.0.6.0" />
 
   <mp:PhoneIdentity PhoneProductId="f6ba6af8-9a0d-4b6e-b45c-6331257c5c5b" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>OralHistoryRecorder</DisplayName>
-    <PublisherDisplayName>nalfaro</PublisherDisplayName>
+    <PublisherDisplayName>shonyouti-dpoppe-agomez-ckirchiner</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 
@@ -35,11 +35,11 @@
       <uap:VisualElements
         DisplayName="OralHistoryRecorder"
         Square150x150Logo="Assets\Square150x150Logo.png"
-        Square44x44Logo="Images\400HistoryLogo.png"
-        Description="OralHistoryRecorder"
+        Square44x44Logo="Images\44HistoryLogo.png"
+        Description="OralHistoryRecorder app made for the History department"
         BackgroundColor="transparent">
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png"/>
-        <uap:SplashScreen Image="Images\hardinglogo.png"  BackgroundColor="white"/>
+        <uap:SplashScreen Image="Images\620x300hardinglogo.png"  BackgroundColor="white"/>
       </uap:VisualElements>
     </Application>
   </Applications>
