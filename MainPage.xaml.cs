@@ -375,27 +375,37 @@ namespace OralHistoryRecorder
         {
             //TODO: If text box is not null 
 
-            // Create the message dialog and set its content
-            var messageDialog = new MessageDialog($"Are you sure you want to go back to home? Your recording will be deleted.");
-
-            // Add commands and set their callbacks
-            messageDialog.Commands.Add(new UICommand("Yes", new UICommandInvokedHandler(this.CommandInvokedHandler)));
-            messageDialog.Commands.Add(new UICommand("No", new UICommandInvokedHandler(this.CommandInvokedHandler)));
-
-            // Set the command that will be invoked by default
-            messageDialog.DefaultCommandIndex = 0;
-
-            // Set the command to be invoked when escape is pressed
-            messageDialog.CancelCommandIndex = 1;
-
-            // Show the message dialog
-            var result = await messageDialog.ShowAsync();
-
-            if (result.Label == "Yes")
+            if (isStop == false && student.RecId != 1)
             {
                 Frame.GoBack();
                 Frame.GoBack();
             }
+            else if (student.RecId == 1)
+            {
+                // Create the message dialog and set its content
+                var messageDialog = new MessageDialog($"Are you sure you want to go back to home? Your recording will be deleted.");
+
+                // Add commands and set their callbacks
+                messageDialog.Commands.Add(new UICommand("Yes", new UICommandInvokedHandler(this.CommandInvokedHandler)));
+                messageDialog.Commands.Add(new UICommand("No", new UICommandInvokedHandler(this.CommandInvokedHandler)));
+
+                // Set the command that will be invoked by default
+                messageDialog.DefaultCommandIndex = 0;
+
+                // Set the command to be invoked when escape is pressed
+                messageDialog.CancelCommandIndex = 1;
+
+                // Show the message dialog
+                var result = await messageDialog.ShowAsync();
+
+                if (result.Label == "Yes")
+                {
+                    Frame.GoBack();
+                    Frame.GoBack();
+                }
+            }
+
+
         }
 
         private void HardingStudentCheck_Unchecked(object sender, RoutedEventArgs e)
