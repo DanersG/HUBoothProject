@@ -212,6 +212,10 @@ namespace OralHistoryRecorder
         private async void refreshBtn_Click(object sender, RoutedEventArgs e)
         {
             btnStop_Click();
+            PlaybackSlider.IsEnabled = false;
+            btnPlay.IsEnabled = false;
+            //CurrentPositionTextBlock.IsTapEnabled = false;
+            btnRemoveRecording.IsEnabled = false;
             studentRecordingList.Clear();
             var tempList = await RecordingManager.retrieveRecordings();
             AddRange(studentRecordingList, tempList);
