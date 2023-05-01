@@ -35,7 +35,7 @@ namespace OralHistoryRecorder
         // -----------------------------------------
 
         // admin email for password reset
-        private string adminEmail = "ckirschner@harding.edu";
+        private string adminEmail = "klaing@harding.edu";
         private string adminPassword;
 
         public AdminPageLogin()
