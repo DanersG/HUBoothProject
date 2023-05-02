@@ -355,6 +355,7 @@ namespace OralHistoryRecorder
 
             // Display Initial Recording Controllers if user's name was entered
             nameTextBox_TextChanged(nameTextBox, null);
+            isPaused = false;
         }
 
         private void PlaybackSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
