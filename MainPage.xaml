@@ -151,6 +151,8 @@
                             SelectionChanged="decadeComboBox_SelectionChanged"
                             SelectedIndex="0"
                               >
+                        <ComboBoxItem Content="1920"/>
+                        <ComboBoxItem Content="1930"/>
                         <ComboBoxItem Content="1940"/>
                         <ComboBoxItem Content="1950"/>
                         <ComboBoxItem Content="1960"/>
@@ -160,6 +162,7 @@
                         <ComboBoxItem Content="2000"/>
                         <ComboBoxItem Content="2010"/>
                         <ComboBoxItem Content="2020"/>
+                        <ComboBoxItem Content="2030"/>
                     </ComboBox>
                 </StackPanel>
             </StackPanel>
