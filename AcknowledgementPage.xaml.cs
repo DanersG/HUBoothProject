@@ -68,5 +68,15 @@ namespace OralHistoryRecorder
         {
             this.Frame.Navigate(typeof(MainPage));
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            switch (moreInfoTextBox.Visibility)
+            {
+                case Visibility.Collapsed: moreInfoTextBox.Visibility = Visibility.Visible; break;
+                case Visibility.Visible: moreInfoTextBox.Visibility = Visibility.Collapsed; break;
+            }
+            
+        }
     }
 }
